@@ -1,0 +1,40 @@
+<div class="col-md-6 col-md-offset-3">
+	<form name="form" (ngSubmit)="f.form.valid && add()" #f="ngForm" novalidate>
+		<div class="form-group" [ngClass]="{ 'has-error': f.submitted && !name.valid }">
+			<label for="name">문제</label>
+			<input type="text" class="form-control" name="name" [(ngModel)]="model.name" #name="ngModel" required />
+		</div>
+		<div class="form-group" [ngClass]="{ 'has-error': f.submitted && !name.valid }">
+			<label for="answer">답</label>
+			<input type="text" class="form-control" name="answer" [(ngModel)]="model.answer" #answer="ngModel" required />
+		</div>
+		<div class="form-group" [ngClass]="{ 'has-error': f.submitted && !name.valid }">
+			<label for="smallcat">카테고리</label>
+			<input type="text" class="form-control" name="smallcat" [(ngModel)]="model.smallcat" #smallcat="ngModel" required />
+		</div>
+		<div class="form-group" [ngClass]="{ 'has-error': f.submitted && !name.valid }">
+			<label for="disable">활성화</label>
+			<label class="switch switch-default switch-pill switch-primary">
+				<input type="checkbox" class="form-control switch-input" name="disable" [(ngModel)]="model.disable" #disable="ngModel" checked>
+				<span class="switch-label"></span>
+				<span class="switch-handle"></span>
+			</label>
+		</div>
+		<div class="form-group" [ngClass]="{ 'has-error': f.submitted && !name.valid }">
+			<div *ngIf="!getImg">
+				<label for="img-upload">이미지 업로드</label>
+				<input type="file" name="img-upload" ng2FileSelect [uploader]="uploader" />
+				<button type="button" class="btn btn-success btn-s"
+					(click)="uploadFile()" [disabled]="!uploader.getNotUploadedItems().length">
+					<span class="glyphicon glyphicon-upload"></span> 올리기
+				</button>
+			</div>
+			<div *ngIf="getImg">
+				<img src="{{imgurl}}">
+			</div>
+		</div>
+		<div class="form-group">
+			<button [disabled]="loading" class="btn btn-primary">생성하기</button>
+		</div>
+	</form>
+</div>

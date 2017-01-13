@@ -1,0 +1,84 @@
+<div class="animated fadeIn">
+	<div class = "card">
+		<div class="card-block">
+			<table class="table table-bordered table-striped table-condensed" *ngIf="results" border="1">
+				<thead>
+					<tr>
+						<th>번호</th>
+						<th>문제</th>
+						<th>답</th>
+						<th>주어</th>
+						<th>동사</th>
+						<th>보어</th>
+						<th>활성화</th>
+						<th>수정</th>
+						<th>삭제</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr *ngFor="let p of results; let i=index">
+						<!--수정 상태의 입력 폼-->
+						<td *ngIf="p._id === getData" colspan="9">
+							<form name="form" (ngSubmit)="f.form.valid && updateSentence()" #f="ngForm" novalidate>
+								<div class="form-group col-md-1" [ngClass]="{ 'has-error': f.submitted && !name.valid }">
+									<label for="priority">우선순위</label>
+									<input type="text" class="form-control" name="priority" [(ngModel)]="model.priority" placeholder="priority" #priority="ngModel" required />
+								</div>
+								<div class="col-md-2">
+									<label for="name">문제</label>
+									<input type="text" class="form-control" name="name" [(ngModel)]="model.name" placeholder="name" #name="ngModel" required />
+								</div>
+								<div class="form-group col-md-2" [ngClass]="{ 'has-error': f.submitted && !name.valid }">
+									<label for="answer">정답</label>
+									<input type="text" class="form-control" name="answer" [(ngModel)]="model.answer" placeholder="answer" #answer="ngModel" required />
+								</div>
+								<div class="form-group col-md-2" [ngClass]="{ 'has-error': f.submitted && !name.valid }">
+									<label for="verb">주어</label>
+									<input type="text" class="form-control" name="verb" [(ngModel)]="model.verb" placeholder="verb" #verb="ngModel" required />
+								</div>
+								<div class="form-group col-md-2" [ngClass]="{ 'has-error': f.submitted && !name.valid }">
+									<label for="subject">동사</label>
+									<input type="text" class="form-control" name="subject" [(ngModel)]="model.subject" placeholder="subject" #subject="ngModel" required />
+								</div>
+								<div class="form-group col-md-2" [ngClass]="{ 'has-error': f.submitted && !name.valid }">
+									<label for="complement">보어</label>
+									<input type="text" class="form-control" name="complement" [(ngModel)]="model.complement" placeholder="complement" #complement="ngModel" required />
+								</div>
+								<div class="form-group col-md-1" [ngClass]="{ 'has-error': f.submitted && !name.valid }">
+									<label for="disable">활성화</label>
+									<label class="switch switch-default switch-pill switch-primary">
+										<input type="checkbox" class="form-control switch-input" name="disable" [(ngModel)]="model.disable" #disable="ngModel" checked>
+										<span class="switch-label"></span>
+										<span class="switch-handle"></span>
+									</label>
+								</div>
+								<div class="form-group">
+									<p><button [disabled]="loading" (click)="changeString(model)" class="btn btn-primary btn-sm">Submit</button></p>
+								</div>
+							</form>
+						</td>
+						<!--기본 상태의 테이블-->
+						<td *ngIf="p._id !== getData">{{i+1}}</td>
+						<td *ngIf="p._id !== getData">{{p.name}}</td>
+						<td *ngIf="p._id !== getData">{{p.answer}}</td>
+						<td *ngIf="p._id !== getData"><a *ngFor="let a of p.verb; let n=index">{{n+1}}: {{a}} </a></td>
+						<td *ngIf="p._id !== getData">{{p.subject}}</td>
+						<td *ngIf="p._id !== getData">{{p.complement}}</td>
+						<td *ngIf="p._id !== getData">{{p.disable}}</td>
+						<td *ngIf="p._id !== getData"><button class="btn btn-sm btn-primary" (click)="getSentence(p._id); $event.stopPropagation()">수정</button></td>
+						<td *ngIf="p._id !== getData"><button class="btn btn-sm btn-danger" (click)="deleteSentence(p); $event.stopPropagation()">삭제</button></td>
+					</tr>
+					<!-- 추가를 위한 입력 폼 -->
+					<tr *ngIf="addData">
+						<td colspan="9">
+							<app-sentence-edit></app-sentence-edit>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="text-right">
+				<button (click)="addSentence()" class="btn btn-primary btn-sm">Add</button>
+			</div>
+		</div>
+	</div>
+</div>

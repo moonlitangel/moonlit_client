@@ -1,0 +1,83 @@
+<div class="animated fadeIn">
+	<div class = "card">
+		<div class="card-block">
+			<table class="table table-bordered table-striped table-condensed" *ngIf="results" border="1">
+				<thead>
+					<tr>
+						<th>번호</th>
+						<th>이미지</th>
+						<th>카테고리</th>
+						<th>문제</th>
+						<th>답</th>
+						<th>활성화</th>
+						<th>수정</th>
+						<th>삭제</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr *ngFor="let p of results; let i=index">
+						<!--수정 상태의 입력 폼-->
+						<td *ngIf="p._id === getData" colspan="8">
+							<form name="form" (ngSubmit)="f.form.valid && updateQuiz()" #f="ngForm" novalidate>
+								<div class="col-md-1">
+									<label for="id">ID: </label> {{model._id}}
+								</div>
+								<div class="form-group col-md-1" [ngClass]="{ 'has-error': f.submitted && !name.valid }">
+									<label for="priority">우선순위</label>
+									<input type="text" class="form-control" name="priority" [(ngModel)]="model.priority" placeholder="priority" #priority="ngModel" required />
+								</div>
+								<div class="col-md-2">
+									<label for="img">이미지</label>
+									<img class="img-responsive" height="150" *ngIf="p.img != null" src="http://localhost:3000/imgs/{{model.img}}">
+								</div>
+								<div class="form-group col-md-2" [ngClass]="{ 'has-error': f.submitted && !name.valid }">
+									<label for="smallcat">카테고리</label>
+									<input type="text" class="form-control" name="smallcat" [(ngModel)]="model.smallcat" placeholder="smallcat" #smallcat="ngModel" required />
+								</div>
+								<div class="form-group col-md-2" [ngClass]="{ 'has-error': f.submitted && !name.valid }">
+									<label for="name">문제</label>
+									<input type="text" class="form-control" name="name" [(ngModel)]="model.name" placeholder="name" #name="ngModel" required />
+								</div>
+								<div class="form-group col-md-2" [ngClass]="{ 'has-error': f.submitted && !name.valid }">
+									<label for="answer">답</label>
+									<input type="text" class="form-control" name="answer" [(ngModel)]="model.answer" placeholder="answer" #answer="ngModel" required />
+								</div>
+								<div class="form-group col-md-1" [ngClass]="{ 'has-error': f.submitted && !name.valid }">
+									<label for="disable">활성화</label>
+									<label class="switch switch-default switch-pill switch-primary">
+										<input type="checkbox" class="form-control switch-input" name="disable" [(ngModel)]="model.disable" #disable="ngModel" checked>
+										<span class="switch-label"></span>
+										<span class="switch-handle"></span>
+									</label>
+								</div>
+								<div class="form-group col-md-1">
+									<label for="edit">수정</label>
+									<p><button [disabled]="loading" class="btn btn-primary btn-sm">Submit</button></p>
+								</div>
+							</form>
+						</td>
+						<!--기본 상태의 테이블-->
+						<td *ngIf="p._id !== getData">{{i+1}}</td>
+						<td *ngIf="p._id !== getData"><img class="img-responsive" height="150" *ngIf="p.img != null" src="http://localhost:3000/imgs/{{p.img}}">그림</td>
+						<td *ngIf="p._id !== getData">{{p.smallcat}}</td>
+						<td *ngIf="p._id !== getData">{{p.name}}</td>
+						<td *ngIf="p._id !== getData">{{p.answer}}</td>
+						<td *ngIf="p._id !== getData">{{p.disable}}</td>
+						<td *ngIf="p._id !== getData"><button class="btn btn-sm btn-primary" (click)="getQuiz(p.smallcat, p._id); $event.stopPropagation()">수정</button></td>
+						<td *ngIf="p._id !== getData"><button class="btn btn-sm btn-danger" (click)="deleteQuiz(p); $event.stopPropagation()">삭제</button></td>
+					</tr>
+					<!-- 추가를 위한 입력 폼 -->
+					<tr *ngIf="addData">
+						<td colspan="8">
+							<app-quiz-edit [category]="category"></app-quiz-edit>
+						</td>
+						<!--<h1>추가 폼을 넣을거야</h1>-->
+					</tr>
+				</tbody>
+			</table>
+			<div class="text-right">
+				<button (click)="addQuiz()" class="btn btn-primary btn-sm">Add</button>
+			</div>
+		</div>
+	</div>
+</div>
