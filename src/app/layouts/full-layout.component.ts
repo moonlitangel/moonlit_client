@@ -8,7 +8,8 @@ import { AuthService } from './../pages/auth.service';
 @Component({
 	selector: 'app-dashboard',
 	templateUrl: './full-layout.component.html',
-	providers: [QuizService]
+	providers: [QuizService],
+	styles: ['.logout { margin-right: 20px }']
 })
 export class FullLayoutComponent implements OnInit {
 	categores: QuizCategory[];
