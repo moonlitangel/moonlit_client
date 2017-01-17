@@ -4,6 +4,8 @@ import { Routes,
 
 //Layouts
 import { FullLayoutComponent }      from './layouts/full-layout.component';
+import { LoginComponent }           from './pages/login.component';
+import { AuthGuard }                from './_guards/auth.guard';
 
 export const routes: Routes = [
     {
@@ -11,9 +13,11 @@ export const routes: Routes = [
         redirectTo: 'dashboard',
         pathMatch: 'full',
     },
+    { path: 'login', component: LoginComponent },
     {
         path: '',
         component: FullLayoutComponent,
+        canActivate: [AuthGuard],
         data: {
             title: 'Home'
         },

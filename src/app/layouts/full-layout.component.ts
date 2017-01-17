@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import { QuizCategory } from './../quiz/quiz-category/quiz-category';
 import { QuizService } from './../quiz/quiz.service';
+import { AuthService } from './../pages/auth.service';
 
 @Component({
 	selector: 'app-dashboard',
@@ -12,7 +14,11 @@ export class FullLayoutComponent implements OnInit {
 	categores: QuizCategory[];
 	bigCategory = [];
 
-	constructor(private QuizService: QuizService) { }
+	constructor(
+		private QuizService: QuizService,
+		private route: ActivatedRoute,
+		private router: Router,
+		private AuthService: AuthService) { }
 
 	getCategory(): void {
 		this.QuizService
@@ -23,6 +29,10 @@ export class FullLayoutComponent implements OnInit {
 					this.makeDisableDate(this.bigCategory, this.categores[i].name);
 				}
 			})
+	}
+
+	logout() {
+		this.AuthService.logout();
 	}
 
 	makeDisableDate(disableDay, val) {

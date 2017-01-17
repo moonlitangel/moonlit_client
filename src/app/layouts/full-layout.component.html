@@ -7,6 +7,11 @@
 				<a class="nav-link navbar-toggler sidebar-toggle" href="#">&#9776;</a>
 			</li>
 		</ul>
+		<ul class="nav navbar-nav float-xs-right hidden-md-down">
+			<li class="nav-item">
+				<button class="btn btn-primary" (click)=logout(); [routerLink]="['/login']">로그아웃</button>
+			</li>
+		</ul>
 	</div>
 </header>
 

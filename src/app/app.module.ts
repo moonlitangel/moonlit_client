@@ -16,6 +16,9 @@ import { SIDEBAR_TOGGLE_DIRECTIVES } from './shared/sidebar.directive';
 import { AsideToggleDirective } from './shared/aside.directive';
 import { BreadcrumbsComponent } from './shared/breadcrumb.component';
 
+import { AuthGuard } from './_guards/auth.guard';
+import { AuthService } from './pages/auth.service';
+
 //import { FileSelectDirective } from 'ng2-file-upload';
 
 // Routing Module
@@ -23,6 +26,7 @@ import { AppRoutingModule } from './app.routing';
 
 //Layouts
 import { FullLayoutComponent } from './layouts/full-layout.component';
+import { LoginComponent } from './pages/login.component';
 
 @NgModule({
 	imports: [
@@ -39,13 +43,16 @@ import { FullLayoutComponent } from './layouts/full-layout.component';
 		NAV_DROPDOWN_DIRECTIVES,
 		BreadcrumbsComponent,
 		SIDEBAR_TOGGLE_DIRECTIVES,
-		AsideToggleDirective
+		AsideToggleDirective,
+		LoginComponent
 		//FileSelectDirective
 	],
 	providers: [{
 		provide: LocationStrategy,
 		useClass: HashLocationStrategy
-	}],
+		},
+		AuthGuard,
+		AuthService],
 	bootstrap: [AppComponent]
 })
 export class AppModule { }
