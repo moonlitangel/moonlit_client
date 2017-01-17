@@ -10,6 +10,8 @@ import { AuthService } from './auth.service';
 export class LoginComponent implements OnInit {
     model: any = {};
     loading = false;
+    message;
+
     constructor(
         private route: ActivatedRoute,
         private router: Router,
@@ -28,6 +30,8 @@ export class LoginComponent implements OnInit {
                     this.router.navigate(['/dashboard']);
                 },
                 error => {
+                    this.message = JSON.parse(error._body);
+                    console.log(this.message.message);
                     this.loading = false;
                 });
     }
