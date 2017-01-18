@@ -9,11 +9,7 @@ export class QuizService {
 
 	private headers = new Headers({ 'Content-Type': 'application/json' });
 	private QuizUrl = 'http://52.175.147.246:3000/api/quiz';
-<<<<<<< HEAD
 	private ApiUrl = 'http://52.175.147.246:3000/api';
-=======
-	private ApiUrl = 'http://52.175.147.246:3000/api/';
->>>>>>> c4bdbc8a11548afbad8145ad18ad88e558a6a442
 
 	constructor(private http: Http) { }
 	getAllQuiz(smallcat: string): Promise<Quiz[]> {
