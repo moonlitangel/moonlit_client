@@ -4,6 +4,8 @@ import { FileSelectDirective } from 'ng2-file-upload';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
+import { DatePickerModule } from 'ng2-datepicker';
+
 import { DashboardComponent }       from './dashboard.component';
 import { DashboardRoutingModule }   from './dashboard-routing.module';
 
@@ -16,7 +18,8 @@ import { JsonPostComponent } from './json-post/json-post.component';
 			CommonModule,
 			FormsModule,
         DashboardRoutingModule,
-        ChartsModule
+        ChartsModule,
+        DatePickerModule
     ],
     declarations: [ DashboardComponent ]
 })

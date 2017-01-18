@@ -4,7 +4,7 @@ import { ChartsModule }             from 'ng2-charts/ng2-charts';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-import { FileSelectDirective } from 'ng2-file-upload';
+import { ShareModule } from './../share/share.module';
 
 import { QuizService } from './quiz.service';
 import { QuizTableComponent }       from './quiz-table.component';
@@ -19,9 +19,10 @@ import { QuizEditComponent } from './quiz-edit/quiz-edit.component';
 			CommonModule,
 			FormsModule,
 			QuizRoutingModule,
-			ChartsModule
+			ChartsModule,
+			ShareModule
     ],
-    declarations: [ QuizComponent, QuizTableComponent, QuizCategoryComponent, QuizEditComponent, FileSelectDirective ],
+    declarations: [ QuizComponent, QuizTableComponent, QuizCategoryComponent, QuizEditComponent ],//FileSelectDirective ],
 		providers: [ QuizService ]
 })
 export class QuizModule { }

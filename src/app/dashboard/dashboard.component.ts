@@ -6,4 +6,9 @@ import { Router }               from '@angular/router';
 })
 export class DashboardComponent{
 	title = 'app works!';
+    date: any;
+
+    add(date): void{
+        console.log(date);
+    }
 }

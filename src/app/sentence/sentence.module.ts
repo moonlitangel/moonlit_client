@@ -9,6 +9,7 @@ import { SentenceRoutingModule }   from './sentence-routing.module';
 import { SentenceService } from './sentence.service';
 import { SentenceTableComponent } from './sentence-table/sentence-table.component';
 import { SentenceEditComponent } from './sentence-edit/sentence-edit.component';
+import { TopikComponent } from './topik/topik.component';
 
 
 @NgModule({
@@ -18,7 +19,7 @@ import { SentenceEditComponent } from './sentence-edit/sentence-edit.component';
         SentenceRoutingModule,
         ChartsModule
     ],
-    declarations: [ SentenceComponent, SentenceTableComponent, SentenceEditComponent ],
+    declarations: [ SentenceComponent, SentenceTableComponent, SentenceEditComponent, TopikComponent ],
 		providers: [ SentenceService ]//, FileSelectDirective ]
 })
 export class SentenceModule { }

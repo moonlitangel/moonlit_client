@@ -19,8 +19,6 @@ import { BreadcrumbsComponent } from './shared/breadcrumb.component';
 import { AuthGuard } from './_guards/auth.guard';
 import { AuthService } from './pages/auth.service';
 
-//import { FileSelectDirective } from 'ng2-file-upload';
-
 // Routing Module
 import { AppRoutingModule } from './app.routing';
 
@@ -45,7 +43,6 @@ import { LoginComponent } from './pages/login.component';
 		SIDEBAR_TOGGLE_DIRECTIVES,
 		AsideToggleDirective,
 		LoginComponent
-		//FileSelectDirective
 	],
 	providers: [{
 		provide: LocationStrategy,
