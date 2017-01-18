@@ -7,8 +7,8 @@ import { Sentence } from './sentence';
 export class SentenceService {
 
 	private headers = new Headers({ 'Content-Type': 'application/json' });
-	private SentenceUrl = 'http://localhost:3000/api/sentence';
-	private ApiUrl = 'http://localhost:3000/api/';
+	private SentenceUrl = 'http://52.175.147.246:3000/api/sentence';
+	private ApiUrl = 'http://52.175.147.246:3000/api';
 
 	constructor(private http: Http) { }
 	getAllSentence(): Promise<Sentence[]> {

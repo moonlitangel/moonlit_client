@@ -8,8 +8,8 @@ import { QuizCategory } from './quiz-category/quiz-category';
 export class QuizService {
 
 	private headers = new Headers({ 'Content-Type': 'application/json' });
-	private QuizUrl = 'http://localhost:3000/api/quiz';
-	private ApiUrl = 'http://localhost:3000/api/';
+	private QuizUrl = 'http://52.175.147.246:3000/api/quiz';
+	private ApiUrl = 'http://52.175.147.246:3000/api';
 
 	constructor(private http: Http) { }
 	getAllQuiz(smallcat: string): Promise<Quiz[]> {

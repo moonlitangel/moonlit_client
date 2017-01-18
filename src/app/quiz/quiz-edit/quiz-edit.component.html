@@ -25,7 +25,7 @@
 				<label for="img-upload">이미지 업로드</label>
 				<input type="file" name="img-upload" ng2FileSelect [uploader]="uploader" />
 				<button type="button" class="btn btn-success btn-s"
-					(click)="uploadFile()" [disabled]="!uploader.getNotUploadedItems().length">
+					(click)="uploadFile()">
 					<span class="glyphicon glyphicon-upload"></span> 올리기
 				</button>
 			</div>

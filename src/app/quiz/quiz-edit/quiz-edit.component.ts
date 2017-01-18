@@ -5,7 +5,7 @@ import { FileUploader } from 'ng2-file-upload/ng2-file-upload';
 import { Quiz } from './../quiz';
 import { QuizService } from './../quiz.service'
 
-const URL = 'http://127.0.0.1:3000/upload';
+const URL = 'http://52.175.147.246:3000/upload';
 
 @Component({
   selector: 'app-quiz-edit',
@@ -18,7 +18,7 @@ export class QuizEditComponent implements OnChanges {
 	public uploader:FileUploader = new FileUploader({url: URL});
 	private uploadResult:any = null;
 	getImg = false;
-	imgurl = 'http://localhost:3000/imgs/';
+	imgurl = 'http://52.175.147.246:3000/imgs/';
 	@Input() category: string;
 
 	constructor(private QuizService: QuizService) { 
