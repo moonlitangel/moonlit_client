@@ -6,7 +6,6 @@ import { SentenceService } from './../sentence.service';
 @Component({
 	selector: 'app-sentence-table',
 	templateUrl: './sentence-table.component.html',
-	//template: '<div>test-ing</div>',
 	styleUrls: ['./sentence-table.component.scss']
 })
 export class SentenceTableComponent implements OnInit {

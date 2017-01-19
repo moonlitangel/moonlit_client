@@ -1,0 +1,65 @@
+<div class="animated fadeIn">
+	<div class="card">
+		<div class="card-block">
+			<table class="table table-bordered table-striped table-condensed" *ngIf="results" border="1">
+				<thead>
+					<tr>
+						<th>번호</th>
+						<th>문제</th>
+						<th>정답</th>
+						<th>시간</th>
+						<th>수정</th>
+						<th>삭제</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr *ngFor="let p of results; let i=index">
+						<!--수정 상태의 입력 폼-->
+						<td *ngIf="p._id === getData" colspan="6">
+							<form name="form" (ngSubmit)="f.form.valid && updateTopik()" #f="ngForm" novalidate>
+								<div class="form-group col-md-1" [ngClass]="{ 'has-error': f.submitted && !topik.valid }">
+									<label for="topiknum">문제번호</label>
+									<input type="text" class="form-control" name="topiknum" [(ngModel)]="model.topiknum" placeholder="topiknum" #topiknum="ngModel"
+										required />
+								</div>
+								<div class="col-md-2">
+									<label for="topik">문제</label>
+									<input type="text" class="form-control" name="topik" [(ngModel)]="model.topik" placeholder="topik" #topik="ngModel" required
+									/>
+								</div>
+								<div class="form-group col-md-2" [ngClass]="{ 'has-error': f.submitted && !topik.valid }">
+									<label for="answer">정답</label>
+									<input type="text" class="form-control" name="answer" [(ngModel)]="model.answer" placeholder="answer" #answer="ngModel" required
+									/>
+								</div>
+								<div class="form-group col-md-2" [ngClass]="{ 'has-error': f.submitted && !topik.valid }">
+									<label for="time">시간</label>
+									<ng2-datepicker name="time" #time="ngModel" [(ngModel)]="model.time" [options]="calendarOptions"></ng2-datepicker>
+								</div>
+								<div class="form-group">
+									<p><button [disabled]="loading" (click)="changeString(model)" class="btn btn-primary btn-sm">Submit</button></p>
+								</div>
+							</form>
+						</td>
+						<!--기본 상태의 테이블-->
+						<td *ngIf="p._id !== getData">{{p.topiknum}}</td>
+						<td *ngIf="p._id !== getData">{{p.topik}}</td>
+						<td *ngIf="p._id !== getData">{{p.answer}}</td>
+						<td *ngIf="p._id !== getData">{{p.time | date: 'yyyy/MM/dd'}}</td>
+						<td *ngIf="p._id !== getData"><button class="btn btn-sm btn-primary" (click)="getOneTopik(p._id); $event.stopPropagation()">수정</button></td>
+						<td *ngIf="p._id !== getData"><button class="btn btn-sm btn-danger" (click)="deleteTopik(p); $event.stopPropagation()">삭제</button></td>
+					</tr>
+					<!-- 추가를 위한 입력 폼 -->
+					<tr *ngIf="addData">
+						<td colspan="6">
+							<app-topik-edit></app-topik-edit>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="text-right">
+				<button (click)="addTopik()" class="btn btn-primary btn-sm">Add</button>
+			</div>
+		</div>
+	</div>
+</div>

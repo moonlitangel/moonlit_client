@@ -2,17 +2,19 @@ import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 import { Sentence } from './sentence';
+import { Topik } from './topik';
 
 @Injectable()
 export class SentenceService {
 
 	private headers = new Headers({ 'Content-Type': 'application/json' });
 	private SentenceUrl = 'http://52.175.147.246:3000/api/sentence';
+	private TopikUrl = 'http://52.175.147.246:3000/api/topik';
+	private TopiksUrl = 'http://52.175.147.246:3000/api/topiks';
 	private ApiUrl = 'http://52.175.147.246:3000/api';
 
 	constructor(private http: Http) { }
 	getAllSentence(): Promise<Sentence[]> {
-		//const url = `${this.SentenceUrl}/${smallcat}`;
 		return this.http.get(this.SentenceUrl)
 			.toPromise()
 			.then(response => response.json() as Sentence[])
@@ -56,21 +58,57 @@ export class SentenceService {
 			.catch(this.handleError);
 	}
 
-	/*getCategory(): Promise<QuizCategory[]> {
-		const url = `${this.ApiUrl}/category`;
-		return this.http.get(url)
+	getAllTopik(): Promise<Topik[]> {
+		return this.http.get(this.TopiksUrl)
 			.toPromise()
-			.then(response => response.json() as QuizCategory[])
+			.then(response => response.json() as Topik[])
 			.catch(this.handleError);
 	}
 
-	getOneCategory(name: string): Promise<QuizCategory[]> {
-		const url = `${this.ApiUrl}/category/${name}`;
+	getTopik(time: Date): Promise<Topik[]> {
+		const url = `${this.TopiksUrl}/${time}`;
 		return this.http.get(url)
 			.toPromise()
-			.then(response => response.json() as QuizCategory[])
+			.then(response => response.json() as Topik[])
 			.catch(this.handleError);
-	}*/
+	}
+
+	getOneTopik(id: string): Promise<Topik> {
+		const url = `${this.TopikUrl}/${id}`;
+		return this.http.get(url)
+			.toPromise()
+			.then(response => response.json() as Topik)
+			.catch(this.handleError);
+	}
+
+	createTopik(Topik: Topik): Promise<Topik> {
+		return this.http.post(this.TopikUrl, Topik, { headers: this.headers })
+			.toPromise()
+			.then(res => {
+				console.log(res);
+				res.json()
+			})
+			.catch(this.handleError);
+	}
+
+	updateTopik(Topik: Topik): Promise<Topik> {
+		const url = `${this.TopikUrl}/${Topik._id}`;
+		return this.http.put(url, JSON.stringify(Topik), { headers: this.headers })
+			.toPromise()
+			.then(res => {
+				console.log(res);
+				res.json() as Topik
+			})
+			.catch(this.handleError);
+	}
+
+	deleteTopik(id: string): Promise<void> {
+		const url = `${this.TopikUrl}/${id}`;
+		return this.http.delete(url, { headers: this.headers })
+			.toPromise()
+			.then(() => null)
+			.catch(this.handleError);
+	}
 
 	private handleError(error: any): Promise<any> {
 		console.error('An error occurred', error); // for demo purposes only
