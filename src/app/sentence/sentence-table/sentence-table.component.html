@@ -1,5 +1,5 @@
 <div class="animated fadeIn">
-	<div class = "card">
+	<div class="card">
 		<div class="card-block">
 			<table class="table table-bordered table-striped table-condensed" *ngIf="results" border="1">
 				<thead>
@@ -22,27 +22,33 @@
 							<form name="form" (ngSubmit)="f.form.valid && updateSentence()" #f="ngForm" novalidate>
 								<div class="form-group col-md-1" [ngClass]="{ 'has-error': f.submitted && !name.valid }">
 									<label for="priority">우선순위</label>
-									<input type="text" class="form-control" name="priority" [(ngModel)]="model.priority" placeholder="priority" #priority="ngModel" required />
+									<input type="text" class="form-control" name="priority" [(ngModel)]="model.priority" placeholder="priority" #priority="ngModel"
+										required />
 								</div>
 								<div class="col-md-2">
 									<label for="name">문제</label>
-									<input type="text" class="form-control" name="name" [(ngModel)]="model.name" placeholder="name" #name="ngModel" required />
+									<input type="text" class="form-control" name="name" [(ngModel)]="model.name" placeholder="name" #name="ngModel" required
+									/>
 								</div>
 								<div class="form-group col-md-2" [ngClass]="{ 'has-error': f.submitted && !name.valid }">
 									<label for="answer">정답</label>
-									<input type="text" class="form-control" name="answer" [(ngModel)]="model.answer" placeholder="answer" #answer="ngModel" required />
+									<input type="text" class="form-control" name="answer" [(ngModel)]="model.answer" placeholder="answer" #answer="ngModel" required
+									/>
 								</div>
 								<div class="form-group col-md-2" [ngClass]="{ 'has-error': f.submitted && !name.valid }">
 									<label for="verb">주어</label>
-									<input type="text" class="form-control" name="verb" [(ngModel)]="model.verb" placeholder="verb" #verb="ngModel" required />
+									<input type="text" class="form-control" name="verb" [(ngModel)]="model.verb" placeholder="verb" #verb="ngModel" required
+									/>
 								</div>
 								<div class="form-group col-md-2" [ngClass]="{ 'has-error': f.submitted && !name.valid }">
 									<label for="subject">동사</label>
-									<input type="text" class="form-control" name="subject" [(ngModel)]="model.subject" placeholder="subject" #subject="ngModel" required />
+									<input type="text" class="form-control" name="subject" [(ngModel)]="model.subject" placeholder="subject" #subject="ngModel"
+										required />
 								</div>
 								<div class="form-group col-md-2" [ngClass]="{ 'has-error': f.submitted && !name.valid }">
 									<label for="complement">보어</label>
-									<input type="text" class="form-control" name="complement" [(ngModel)]="model.complement" placeholder="complement" #complement="ngModel" required />
+									<input type="text" class="form-control" name="complement" [(ngModel)]="model.complement" placeholder="complement" #complement="ngModel"
+										required />
 								</div>
 								<div class="form-group col-md-1" [ngClass]="{ 'has-error': f.submitted && !name.valid }">
 									<label for="disable">활성화</label>

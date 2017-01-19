@@ -7,8 +7,8 @@ import { QuizCategory } from './quiz-category';
 import { QuizService } from './../quiz.service';
 
 @Component({
-  templateUrl: './quiz-category.component.html',
-  styleUrls: ['./quiz-category.component.scss']
+	templateUrl: './quiz-category.component.html',
+	styleUrls: ['./quiz-category.component.scss']
 })
 export class QuizCategoryComponent implements OnInit {
 	categores: QuizCategory[];
@@ -17,9 +17,9 @@ export class QuizCategoryComponent implements OnInit {
 	name = '';
 
 
-  constructor(
+	constructor(
 		private route: ActivatedRoute,
-    private router: Router,
+		private router: Router,
 		private QuizService: QuizService
 	) { }
 
@@ -33,9 +33,9 @@ export class QuizCategoryComponent implements OnInit {
 		this.voted = true;
 	}
 
-  ngOnInit() {
+	ngOnInit() {
 		this.route.params
-			.switchMap((params: Params) => this.name = params['name'] )
+			.switchMap((params: Params) => this.name = params['name'])
 			.subscribe(() => this.getOneCategory(this.name));
-  }
+	}
 }

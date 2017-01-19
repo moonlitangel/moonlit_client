@@ -4,10 +4,10 @@ import { Sentence } from './../sentence';
 import { SentenceService } from './../sentence.service';
 
 @Component({
-  selector: 'app-sentence-table',
-  templateUrl: './sentence-table.component.html',
+	selector: 'app-sentence-table',
+	templateUrl: './sentence-table.component.html',
 	//template: '<div>test-ing</div>',
-  styleUrls: ['./sentence-table.component.scss']
+	styleUrls: ['./sentence-table.component.scss']
 })
 export class SentenceTableComponent implements OnInit {
 	results: Sentence[];
@@ -15,13 +15,13 @@ export class SentenceTableComponent implements OnInit {
 	getData = '';
 	addData = false;
 
-  constructor(private SentenceService: SentenceService) { }
+	constructor(private SentenceService: SentenceService) { }
 
 	getAllSentence(): void {
 		this.SentenceService.getAllSentence()
 			.then(results => {
 				this.results = results;
-				})
+			})
 	}
 
 	getSentence(id: string): void {
@@ -35,7 +35,7 @@ export class SentenceTableComponent implements OnInit {
 	updateSentence(Sentence: Sentence): void {
 		this.SentenceService.updateSentence(this.model)
 			.then(() => {
-				this.getData= '';
+				this.getData = '';
 				this.getAllSentence();
 			})
 	}
@@ -50,15 +50,15 @@ export class SentenceTableComponent implements OnInit {
 	deleteSentence(Sentence: Sentence): void {
 		this.SentenceService.deleteSentence(Sentence._id)
 			.then(() => {
-          this.results = this.results.filter(h => h !== Sentence);
-        })
+				this.results = this.results.filter(h => h !== Sentence);
+			})
 	}
 
 	addSentence() {
 		this.addData = true;
 	}
-	
-  ngOnInit() {
+
+	ngOnInit() {
 		this.getAllSentence();
 	}
 }

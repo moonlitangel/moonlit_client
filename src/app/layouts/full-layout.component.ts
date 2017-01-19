@@ -26,7 +26,7 @@ export class FullLayoutComponent implements OnInit {
 			.getCategory()
 			.then(results => {
 				this.categores = results;
-				for(let i=0;i<this.categores.length;i++) {
+				for (let i = 0; i < this.categores.length; i++) {
 					this.makeDisableDate(this.bigCategory, this.categores[i].name);
 				}
 			})
@@ -43,7 +43,7 @@ export class FullLayoutComponent implements OnInit {
 		}
 	}
 
-	
+
 
 	ngOnInit(): void {
 		this.getCategory();

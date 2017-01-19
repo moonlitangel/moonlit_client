@@ -4,14 +4,14 @@ import { Sentence } from './../sentence';
 import { SentenceService } from './../sentence.service';
 
 @Component({
-  selector: 'app-sentence-edit',
-  templateUrl: './sentence-edit.component.html',
-  styleUrls: ['./sentence-edit.component.scss']
+	selector: 'app-sentence-edit',
+	templateUrl: './sentence-edit.component.html',
+	styleUrls: ['./sentence-edit.component.scss']
 })
 export class SentenceEditComponent implements OnInit {
 	model = new Sentence;
 
-  constructor(private SentenceService: SentenceService) { }
+	constructor(private SentenceService: SentenceService) { }
 
 	add(model): void {
 		this.SentenceService.createSentence(this.model)
@@ -26,7 +26,7 @@ export class SentenceEditComponent implements OnInit {
 		this.model.subject = model.subject.toString().split(/\s*,\s|,/);
 	}
 
-  ngOnInit() {
-  }
+	ngOnInit() {
+	}
 
 }

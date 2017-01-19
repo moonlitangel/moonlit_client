@@ -29,27 +29,29 @@ export class QuizService {
 	}
 
 	createQuiz(Quiz: Quiz): Promise<Quiz> {
-		return this.http.post(this.QuizUrl, Quiz, {headers: this.headers})
-		.toPromise()
-		.then(res => {
-			console.log(res);
-			res.json()})
-		.catch(this.handleError);
+		return this.http.post(this.QuizUrl, Quiz, { headers: this.headers })
+			.toPromise()
+			.then(res => {
+				console.log(res);
+				res.json()
+			})
+			.catch(this.handleError);
 	}
 
 	updateQuiz(Quiz: Quiz): Promise<Quiz> {
 		const url = `${this.QuizUrl}/${Quiz._id}`;
-		return this.http.put(url, JSON.stringify(Quiz), {headers: this.headers})
-		.toPromise()
-		.then(res => {
-			console.log(res);
-			res.json() as Quiz})
-		.catch(this.handleError);
+		return this.http.put(url, JSON.stringify(Quiz), { headers: this.headers })
+			.toPromise()
+			.then(res => {
+				console.log(res);
+				res.json() as Quiz
+			})
+			.catch(this.handleError);
 	}
 
 	deleteQuiz(id: string): Promise<void> {
 		const url = `${this.QuizUrl}/${id}`;
-		return this.http.delete(url, {headers: this.headers})
+		return this.http.delete(url, { headers: this.headers })
 			.toPromise()
 			.then(() => null)
 			.catch(this.handleError);

@@ -26,13 +26,13 @@ export class LoginComponent implements OnInit {
         this.loading = true;
         this.AuthService.login(this.model.id, this.model.password)
             .subscribe(
-                data => {
-                    this.router.navigate(['/dashboard']);
-                },
-                error => {
-                    this.message = JSON.parse(error._body);
-                    console.log(this.message.message);
-                    this.loading = false;
-                });
+            data => {
+                this.router.navigate(['/dashboard']);
+            },
+            error => {
+                this.message = JSON.parse(error._body);
+                console.log(this.message.message);
+                this.loading = false;
+            });
     }
 }

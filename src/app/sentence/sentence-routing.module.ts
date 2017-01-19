@@ -1,9 +1,11 @@
-import { NgModule }             from '@angular/core';
-import { Routes,
-         RouterModule }         from '@angular/router';
+import { NgModule } from '@angular/core';
+import {
+    Routes,
+    RouterModule
+} from '@angular/router';
 
-import { SentenceComponent }   from './sentence.component';
-import { TopikComponent }   from './topik/topik.component';
+import { SentenceComponent } from './sentence.component';
+import { TopikComponent } from './topik/topik.component';
 
 const routes: Routes = [
     {
@@ -12,8 +14,8 @@ const routes: Routes = [
             title: 'Sentence'
         },
         children: [
-            { path: 'topik', component: TopikComponent, data: { title:'Topik'} },
-            { path: 'sentence', component: SentenceComponent, data: {title: 'Sentence'} }
+            { path: 'topik', component: TopikComponent, data: { title: 'Topik' } },
+            { path: 'sentence', component: SentenceComponent, data: { title: 'Sentence' } }
         ]
     }
 ];
@@ -22,4 +24,4 @@ const routes: Routes = [
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule]
 })
-export class SentenceRoutingModule {}
+export class SentenceRoutingModule { }

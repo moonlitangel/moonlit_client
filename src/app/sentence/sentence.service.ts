@@ -28,27 +28,29 @@ export class SentenceService {
 	}
 
 	createSentence(Sentence: Sentence): Promise<Sentence> {
-		return this.http.post(this.SentenceUrl, Sentence, {headers: this.headers})
-		.toPromise()
-		.then(res => {
-			console.log(res);
-			res.json()})
-		.catch(this.handleError);
+		return this.http.post(this.SentenceUrl, Sentence, { headers: this.headers })
+			.toPromise()
+			.then(res => {
+				console.log(res);
+				res.json()
+			})
+			.catch(this.handleError);
 	}
 
 	updateSentence(Sentence: Sentence): Promise<Sentence> {
 		const url = `${this.SentenceUrl}/${Sentence._id}`;
-		return this.http.put(url, JSON.stringify(Sentence), {headers: this.headers})
-		.toPromise()
-		.then(res => {
-			console.log(res);
-			res.json() as Sentence})
-		.catch(this.handleError);
+		return this.http.put(url, JSON.stringify(Sentence), { headers: this.headers })
+			.toPromise()
+			.then(res => {
+				console.log(res);
+				res.json() as Sentence
+			})
+			.catch(this.handleError);
 	}
 
 	deleteSentence(id: string): Promise<void> {
 		const url = `${this.SentenceUrl}/${id}`;
-		return this.http.delete(url, {headers: this.headers})
+		return this.http.delete(url, { headers: this.headers })
 			.toPromise()
 			.then(() => null)
 			.catch(this.handleError);

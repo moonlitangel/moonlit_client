@@ -10,7 +10,7 @@ export class AuthService {
   constructor(private http: Http) { }
 
   login(id: string, password: string) {
-    return this.http.post(this.LoginUrl, JSON.stringify({ id: id, password: password }), {headers: this.headers})
+    return this.http.post(this.LoginUrl, JSON.stringify({ id: id, password: password }), { headers: this.headers })
       .map((response: Response) => {
         // login successful if there's a jwt token in the response
         let user = response.json();
