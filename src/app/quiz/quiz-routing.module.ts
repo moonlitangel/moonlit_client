@@ -7,10 +7,19 @@ import {
 import { QuizTableComponent } from './quiz-table.component';
 import { QuizCategoryComponent } from './quiz-category/quiz-category.component';
 import { QuizComponent } from './quiz.component';
+import { NewCategoryComponent } from './quiz-category/new-category.component';
 
 const routes: Routes = [
-    { path: '', component: QuizComponent, data: { title: 'Quiz' } },
-    { path: ':name', component: QuizCategoryComponent, data: { title: 'Quiz' } }
+    {
+        path: '',
+        data: {
+            title: 'Quiz'
+        },
+        children: [
+            { path: 'newcategory', component: NewCategoryComponent, data: { title: 'Category'}},
+            { path: 'edit/:name', component: QuizCategoryComponent, data: { title: 'Edit' }}
+        ]
+    }
 ];
 
 @NgModule({

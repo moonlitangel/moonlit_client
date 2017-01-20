@@ -12,6 +12,7 @@ import { QuizComponent } from './quiz.component';
 import { QuizCategoryComponent } from './quiz-category/quiz-category.component';
 import { QuizRoutingModule } from './quiz-routing.module';
 import { QuizEditComponent } from './quiz-edit/quiz-edit.component';
+import { NewCategoryComponent } from './quiz-category/new-category.component';
 
 
 @NgModule({
@@ -22,7 +23,7 @@ import { QuizEditComponent } from './quiz-edit/quiz-edit.component';
 		ChartsModule,
 		ShareModule
 	],
-	declarations: [QuizComponent, QuizTableComponent, QuizCategoryComponent, QuizEditComponent],//FileSelectDirective ],
+	declarations: [QuizComponent, QuizTableComponent, QuizCategoryComponent, QuizEditComponent, NewCategoryComponent],//FileSelectDirective ],
 		providers: [QuizService]
 })
 export class QuizModule { }

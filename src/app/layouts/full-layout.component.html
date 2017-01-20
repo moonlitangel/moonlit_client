@@ -31,9 +31,12 @@
 				<ul class="nav-dropdown-items">
 					<div *ngFor="let name of bigCategory">
 						<li class="nav-item">
-							<a class="nav-link" routerLinkActive="active" [routerLink]="['/quiz', name]"><i class="icon-puzzle"></i>{{name}}</a>
+							<a class="nav-link" routerLinkActive="active" [routerLink]="['/quiz/edit', name]"><i class="icon-puzzle"></i>{{name}}</a>
 						</li>
 					</div>
+					<li class="nav-item">
+						<a class="nav-link" routerLinkActive="active" [routerLink]="['/quiz/newcategory']">카테고리 생성</a>
+					</li>
 				</ul>
 			</li>
 			<li class="nav-item nav-dropdown" routerLinkActive="open">
