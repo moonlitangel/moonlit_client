@@ -20,7 +20,7 @@
             <td *ngIf="p._id !== getData">{{p.name}}</td>
             <td *ngIf="p._id !== getData">{{p.smallcat}}</td>
             <td *ngIf="p._id !== getData"><button class="btn btn-sm btn-primary" (click)="getSmallCategory(p.smallcat); $event.stopPropagation()">수정</button></td>
-            <td *ngIf="p._id !== getData"><button class="btn btn-sm btn-danger" (clisk)="deleteCategory(p); $event.stopPropagation()">삭제</button></td>
+            <td *ngIf="p._id !== getData"><button class="btn btn-sm btn-danger" (click)="deleteCategory(p); $event.stopPropagation()">삭제</button></td>
           </tr>
           <!-- 추가를 위한 입력 폼 -->
           <tr *ngIf="addData">

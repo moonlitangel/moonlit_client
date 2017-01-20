@@ -51,6 +51,7 @@ export class NewCategoryComponent implements OnInit {
 		this.QuizService
 			.deleteCategory(QuizCategory.smallcat)
 			.then(() => {
+        console.log("성공");
 				this.categores = this.categores.filter(h => h !== QuizCategory);
 			});
 	}
