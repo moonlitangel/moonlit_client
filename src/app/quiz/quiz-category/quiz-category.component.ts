@@ -12,6 +12,8 @@ import { QuizService } from './../quiz.service';
 })
 export class QuizCategoryComponent implements OnInit {
 	categores: QuizCategory[];
+	voted = false;
+	category = '';
 	name = '';
 
 
