@@ -3,5 +3,5 @@ export class Topik {
   topik: string;
   answer: string[];
   topiknum: number;
-  time: Date;
+  time: Date= new Date();
 }
