@@ -47,6 +47,14 @@ export class NewCategoryComponent implements OnInit {
 			})
 	}
 
+  deleteCategory(QuizCategory: QuizCategory): void {
+		this.QuizService
+			.deleteCategory(QuizCategory.smallcat)
+			.then(() => {
+				this.categores = this.categores.filter(h => h !== QuizCategory);
+			});
+	}
+
 	makeDisableDate(disableDay, val) {
 		var dateIndex = disableDay.indexOf(val);
 		if (dateIndex == -1) {
