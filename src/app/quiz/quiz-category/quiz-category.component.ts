@@ -12,8 +12,6 @@ import { QuizService } from './../quiz.service';
 })
 export class QuizCategoryComponent implements OnInit {
 	categores: QuizCategory[];
-	voted = false;
-	category = 'asfj3#Fasgb';
 	name = '';
 
 
@@ -27,10 +25,6 @@ export class QuizCategoryComponent implements OnInit {
 		this.QuizService
 			.getOneCategory(name)
 			.then(results => this.categores = results)
-	}
-	testClick(category: string) {
-		this.category = category;
-		this.voted = true;
 	}
 
 	ngOnInit() {
