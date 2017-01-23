@@ -1,6 +1,12 @@
-<div class="row">
+<!--<div class="row">
 	<div class="col-md-4" *ngFor="let category of categores">
 		<button class="btn btn-block btn-info" (click)="testClick(category.smallcat)">{{category.smallcat}}</button>
 	</div>
 </div>
-<app-quiz-table [category]="category"></app-quiz-table>
+<app-quiz-table [category]="category"></app-quiz-table>-->
+
+<tabset>
+	<tab *ngFor="let category of categores" [heading]="category.smallcat">
+		<app-quiz-table [category]="category.smallcat"></app-quiz-table>
+	</tab>
+</tabset>

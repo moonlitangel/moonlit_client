@@ -59,7 +59,6 @@ export class QuizTableComponent implements OnChanges {
 	}
 
 	ngOnChanges() {
-		console.log(this.category);
 		this.getAllQuiz(this.category);
 	}
 }
