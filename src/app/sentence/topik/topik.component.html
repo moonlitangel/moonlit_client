@@ -1,4 +1,2 @@
-<p>
-  topik works!
-</p>
-<app-topik-table></app-topik-table>
+<ng2-datepicker [(ngModel)]="date" [options]="calendarOptions"></ng2-datepicker>
+<app-topik-table [time]="date.formatted"></app-topik-table>

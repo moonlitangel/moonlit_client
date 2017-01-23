@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 
 import { Topik } from './../topik';
 import { SentenceService } from './../sentence.service';
@@ -7,11 +7,12 @@ import { SentenceService } from './../sentence.service';
 	selector: 'app-topik-table',
 	templateUrl: './topik-table.component.html'
 })
-export class TopikTableComponent implements OnInit {
+export class TopikTableComponent implements OnChanges {
 	results: Topik[];
 	model = new Topik;
 	getData = '';
 	addData = false;
+	@Input() time: any;
 
 	constructor(private SentenceService: SentenceService) { }
 
@@ -32,6 +33,7 @@ export class TopikTableComponent implements OnInit {
 			.then(results => {
 				this.results = results;
 			})
+			.catch(() => this.getAllTopik())
 	}
 
 	getOneTopik(id: string): void {
@@ -67,7 +69,7 @@ export class TopikTableComponent implements OnInit {
 		this.addData = true;
 	}
 
-	ngOnInit() {
-		this.getAllTopik();
+	ngOnChanges() {
+		this.getTopik(this.time);
 	}
 }
