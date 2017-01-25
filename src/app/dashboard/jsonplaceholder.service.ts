@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 import { JsonPlaceholder } from './jsonplaceholder';
+import { User } from './user';
 
 @Injectable()
 export class JsonPlaceholderService {
@@ -10,6 +11,17 @@ export class JsonPlaceholderService {
 	private DataUrl = 'http://localhost:3000/api/quiz';
 
 	constructor(private http: Http) { }
+
+	user(User: User): Promise<User> {
+		const Url = 'http://52.175.147.246:3000/api/user';
+		return this.http.post(Url, User, {headers: this.headers})
+			.toPromise()
+			.then(res => {
+			console.log(res);
+			res.json()})
+			.catch(this.handleError);
+	}
+	
 	getAll(): Promise<JsonPlaceholder[]> {
 		return this.http.get(this.DataUrl)
 			.toPromise()
