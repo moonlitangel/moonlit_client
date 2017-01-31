@@ -2,6 +2,16 @@
 <Button class="btn btn-primary" (click)="createUser()">생성</Button>
 <Button class="btn btn-primary" (click)="getProgress()">받기</Button>
 
+<div *ngIf="data==1">
+	구글 ID: {{model.user}}
+	<ul *ngFor="let a of model.progress">
+		<li>카테고리: {{a.smallcat}}</li>
+		<li>진행도1: {{a.level1}}</li>
+		<li>진행도2: {{a.level2}}</li>
+		<li>진행도3: {{a.level3}}</li>
+	</ul>
+</div>
+
 <div class="col-md-6 col-md-offset-3">
 	<form name="form" (ngSubmit)="f.form.valid && add()" #f="ngForm" novalidate>
 		<div class="form-group" [ngClass]="{ 'has-error': f.submitted && !smallcat.valid }">

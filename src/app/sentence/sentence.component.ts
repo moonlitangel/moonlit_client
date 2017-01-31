@@ -12,6 +12,7 @@ import { ProgressService } from './../share/progress.service';
 export class SentenceComponent implements OnInit {
   model = new Progress;
   progress = new DetailProgress;
+  data = 0;
 
   constructor(private ProgressService: ProgressService) {
     this.model.user = localStorage.getItem('googleUser');
@@ -29,6 +30,7 @@ export class SentenceComponent implements OnInit {
       .then((results) => {
         this.model = results;
         console.log(results);
+        this.data = 1;
       })
   }
 
