@@ -1,27 +1,47 @@
 import { Component, OnInit } from '@angular/core';
 
-import { User } from './../dashboard/user';
-import { JsonPlaceholderService } from './../dashboard/jsonplaceholder.service';
+import { Progress } from './../share/progress';
+import { DetailProgress } from './../share/detailprogress';
+import { ProgressService } from './../share/progress.service';
 
 @Component({
   selector: 'app-sentence',
   templateUrl: './sentence.component.html',
-  styleUrls: ['./sentence.component.scss'],
-  providers: [JsonPlaceholderService]
+  styleUrls: ['./sentence.component.scss']
 })
 export class SentenceComponent implements OnInit {
-  model = new User;
+  model = new Progress;
+  progress = new DetailProgress;
 
-  constructor(private JsonPlaceholderService: JsonPlaceholderService) {
-    this.model.id = localStorage.getItem('googleUser');
-    this.model.password = localStorage.getItem('googleUser');
+  constructor(private ProgressService: ProgressService) {
+    this.model.user = localStorage.getItem('googleUser');
   }
 
-  createUser(User: User): void{
-    this.JsonPlaceholderService.user(this.model)
+  createUser(Progress: Progress): void{
+    this.ProgressService.createProgress(this.model)
       .then(() => {
         console.log(this.model);
       })
+  }
+
+  getProgress(): void{
+    this.ProgressService.getUserProgress(this.model.user)
+      .then((results) => {
+        this.model = results;
+        console.log(results);
+      })
+  }
+
+  add(model): void {
+		this.ProgressService.updateProgress(this.model)
+			.then(() => {
+        console.log("성공");
+			})
+	}
+
+  progressPush(model): void {
+    this.model.progress = [model];
+    console.log(this.model);
   }
 
   ngOnInit() {

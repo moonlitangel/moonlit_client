@@ -1,2 +1,27 @@
 <app-sentence-table></app-sentence-table>
-<Button class="btn btn-primary" (click)="createUser()">테스트용</Button>
+<Button class="btn btn-primary" (click)="createUser()">생성</Button>
+<Button class="btn btn-primary" (click)="getProgress()">받기</Button>
+
+<div class="col-md-6 col-md-offset-3">
+	<form name="form" (ngSubmit)="f.form.valid && add()" #f="ngForm" novalidate>
+		<div class="form-group" [ngClass]="{ 'has-error': f.submitted && !smallcat.valid }">
+			<label for="smallcat">카테고리</label>
+			<input type="text" class="form-control" name="smallcat" [(ngModel)]="progress.smallcat" #smallcat="ngModel" required />
+		</div>
+		<div class="form-group" [ngClass]="{ 'has-error': f.submitted && !smallcat.valid }">
+			<label for="level1">단계1</label>
+			<input type="text" class="form-control" name="level1" [(ngModel)]="progress.level1" #level1="ngModel" required />
+		</div>
+		<div class="form-group" [ngClass]="{ 'has-error': f.submitted && !smallcat.valid }">
+			<label for="level2">단계2</label>
+			<input type="text" class="form-control" name="level2" [(ngModel)]="progress.level2" #level2="ngModel" required />
+		</div>
+    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !smallcat.valid }">
+			<label for="level3">단계3</label>
+			<input type="text" class="form-control" name="level3" [(ngModel)]="progress.level3" #level3="ngModel" required />
+		</div>
+		<div class="form-group">
+			<button (click)="progressPush(progress)" class="btn btn-primary">생성하기</button>
+		</div>
+	</form>
+</div>
