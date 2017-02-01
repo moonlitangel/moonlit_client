@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChange } from '@angular/core';
 
 import { Sentence } from './../sentence';
 import { SentenceService } from './../sentence.service';
@@ -8,8 +8,9 @@ import { SentenceService } from './../sentence.service';
 	templateUrl: './sentence-edit.component.html',
 	styleUrls: ['./sentence-edit.component.scss']
 })
-export class SentenceEditComponent implements OnInit {
+export class SentenceEditComponent implements OnChanges {
 	model = new Sentence;
+	@Input() step: number;
 
 	constructor(private SentenceService: SentenceService) { }
 
@@ -26,7 +27,8 @@ export class SentenceEditComponent implements OnInit {
 		this.model.subject = model.subject.toString().split(/\s*,\s|,/);
 	}
 
-	ngOnInit() {
+	ngOnChanges() {
+		this.model.step = this.step;
 	}
 
 }

@@ -7,4 +7,5 @@ export class Sentence {
 	verb: string[];
 	subject: string[];
 	priority: number;
+	step: number;
 }

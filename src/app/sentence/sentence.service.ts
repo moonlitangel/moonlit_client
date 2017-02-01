@@ -29,6 +29,14 @@ export class SentenceService {
 			.catch(this.handleError);
 	}
 
+	getStepSentence(step: number): Promise<Sentence[]> {
+		const url = `${this.SentenceUrl}/step/${step}`;
+		return this.http.get(url)
+			.toPromise()
+			.then(response => response.json() as Sentence[])
+			.catch(this.handleError);
+	}
+
 	createSentence(Sentence: Sentence): Promise<Sentence> {
 		return this.http.post(this.SentenceUrl, Sentence, { headers: this.headers })
 			.toPromise()

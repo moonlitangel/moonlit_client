@@ -1,4 +1,18 @@
-<app-sentence-table></app-sentence-table>
+<tabset>
+	<tab heading="All">
+		<app-sentence-table [step]="0"></app-sentence-table>
+	</tab>
+	<tab heading="Step 1">
+		<app-sentence-table [step]="1"></app-sentence-table>
+	</tab>
+	<tab heading="Step 2">
+		<app-sentence-table [step]="2"></app-sentence-table>
+	</tab>
+	<tab heading="Step 3">
+		<app-sentence-table [step]="3"></app-sentence-table>
+	</tab>
+</tabset>
+
 <!--<Button class="btn btn-primary" (click)="createUser()">생성</Button>
 <Button class="btn btn-primary" (click)="getProgress()">받기</Button>
 

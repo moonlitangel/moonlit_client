@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChange } from '@angular/core';
 
 import { Sentence } from './../sentence';
 import { SentenceService } from './../sentence.service';
@@ -8,11 +8,13 @@ import { SentenceService } from './../sentence.service';
 	templateUrl: './sentence-table.component.html',
 	styleUrls: ['./sentence-table.component.scss']
 })
-export class SentenceTableComponent implements OnInit {
+export class SentenceTableComponent implements OnChanges {
 	results: Sentence[];
 	model = new Sentence;
 	getData = '';
 	addData = false;
+	@Input() step: number;
+	getStep: false;
 
 	constructor(private SentenceService: SentenceService) { }
 
@@ -28,6 +30,13 @@ export class SentenceTableComponent implements OnInit {
 			.then(result => {
 				this.getData = id;
 				this.model = result;
+			})
+	}
+
+	getStepSentence(step: number): void{
+		this.SentenceService.getStepSentence(step)
+			.then(results => {
+				this.results = results;
 			})
 	}
 
@@ -57,7 +66,11 @@ export class SentenceTableComponent implements OnInit {
 		this.addData = true;
 	}
 
-	ngOnInit() {
-		this.getAllSentence();
+	ngOnChanges() {
+		if(this.step === 0) {
+			this.getAllSentence();
+		}	else {
+			this.getStepSentence(this.step);
+		}
 	}
 }
