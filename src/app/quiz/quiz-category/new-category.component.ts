@@ -36,9 +36,19 @@ export class NewCategoryComponent implements OnInit {
   getSmallCategory(name: string): void {
     this.QuizService.getSmallCategory(name)
       .then(results => {
-        this.model = results;
+				this.getData = name;
+        this.model = results;			
       })
   }
+
+	updateCategory(QuizCategory: QuizCategory): void {
+		this.QuizService
+			.updateCategory(this.model)
+			.then(() => {
+				this.getData = '';
+				this.getCategory();
+			})
+	}
 
   add(model): void {
 		this.QuizService.createCategory(this.model)
@@ -49,7 +59,7 @@ export class NewCategoryComponent implements OnInit {
 
   deleteCategory(QuizCategory: QuizCategory): void {
 		this.QuizService
-			.deleteCategory(QuizCategory.smallcat)
+			.deleteCategory(QuizCategory._id)
 			.then(() => {
         console.log("성공");
 				this.categores = this.categores.filter(h => h !== QuizCategory);

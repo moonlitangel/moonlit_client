@@ -93,12 +93,12 @@ export class QuizService {
 	}
 
 	updateCategory(QuizCategory: QuizCategory): Promise<QuizCategory> {
-		const url = `${this.ApiUrl}/smallcat/${name}`;
-		return this.http.put(url, JSON.stringify(Quiz), { headers: this.headers })
+		const url = `${this.ApiUrl}/smallcat/${QuizCategory._id}`;
+		return this.http.put(url, JSON.stringify(QuizCategory), { headers: this.headers })
 			.toPromise()
 			.then(res => {
 				console.log(res);
-				res.json() as Quiz
+				res.json() as QuizCategory
 			})
 			.catch(this.handleError);
 	}
