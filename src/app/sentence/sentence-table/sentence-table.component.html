@@ -94,7 +94,8 @@
 						<!--기본 상태의 테이블-->
 						<!--<td *ngIf="modifyPro"><button class="btn btn-null"><i class="fa fa-2x fa-caret-square-o-up"></i></button></td>
 						<td *ngIf="modifyPro"><button class="btn btn-null"><i class="fa fa-2x fa-caret-square-o-down"></i></button></td>-->
-						<td *ngIf="p._id !== getData">{{i+1}}</td>
+						<td *ngIf="p._id !== getData && step !== 0">{{i+1}}</td>
+						<td *ngIf="p._id !== getData && step === 0">Step: {{p.step}}</td>
 						<td *ngIf="p._id !== getData">{{p.name}}</td>
 						<td *ngIf="p._id !== getData">{{p.answer}}</td>
 						<td *ngIf="p._id !== getData">{{p.subject}}</td>

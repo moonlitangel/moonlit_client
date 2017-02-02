@@ -2,7 +2,7 @@
 	<form name="form" (ngSubmit)="f.form.valid && add()" #f="ngForm" novalidate>
 		<div class="form-group" [ngClass]="{ 'has-error': f.submitted && !name.valid }">
 			<label for="step">Step: {{model.step}}</label>
-			<select class="form-control" [(ngModel)]="model.step" #step="ngModel" required	name="step">
+			<select class="form-control" [(ngModel)]="model.step" #step="ngModel" required	name="step" (change)="changeStep($event.target.value)">
 				<option value="1">Step 1</option>
 				<option value="2">Step 2</option>
 				<option value="3">Step 3</option>
@@ -24,17 +24,23 @@
 			<label for="post1">조사</label>
 			<input type="text" class="form-control" name="post1" [(ngModel)]="model.post1" #post1="ngModel" required />
 		</div>
-		<div *ngIf="model.step === 2" class="form-group" [ngClass]="{ 'has-error': f.submitted && !name.valid }">
-			<label for="object">목적어</label>
-			<input type="text" class="form-control" name="object" [(ngModel)]="model.object" #object="ngModel" required />
+		<div *ngIf="model.step === 2 || getStep == 2">
+			<div class="form-group" [ngClass]="{ 'has-error': f.submitted && !name.valid }">
+				<label for="object">목적어</label>
+				<input type="text" class="form-control" name="object" [(ngModel)]="model.object" #object="ngModel" required />
+			</div>
 		</div>
-		<div *ngIf="model.step === 3" class="form-group" [ngClass]="{ 'has-error': f.submitted && !name.valid }">
-			<label for="complement">보어</label>
-			<input type="text" class="form-control" name="complement" [(ngModel)]="model.complement" #complement="ngModel" required />
+		<div *ngIf="model.step === 3 || getStep == 3">
+			<div class="form-group" [ngClass]="{ 'has-error': f.submitted && !name.valid }">
+				<label for="complement">보어</label>
+				<input type="text" class="form-control" name="complement" [(ngModel)]="model.complement" #complement="ngModel" required />
+			</div>
 		</div>
-		<div *ngIf="model.step === 2 || model.step === 3" class="form-group" [ngClass]="{ 'has-error': f.submitted && !name.valid }">
-			<label for="post2">조사</label>
-			<input type="text" class="form-control" name="post2" [(ngModel)]="model.post2" #post2="ngModel" required />
+		<div *ngIf="model.step === 2 || model.step === 3  || getStep == 2 || getStep == 3">
+			<div class="form-group" [ngClass]="{ 'has-error': f.submitted && !name.valid }">
+				<label for="post2">조사</label>
+				<input type="text" class="form-control" name="post2" [(ngModel)]="model.post2" #post2="ngModel" required />
+			</div>
 		</div>
 		<div class="form-group" [ngClass]="{ 'has-error': f.submitted && !name.valid }">
 			<label for="verb">동사</label>

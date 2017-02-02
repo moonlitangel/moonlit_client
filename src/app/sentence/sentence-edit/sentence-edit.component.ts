@@ -11,6 +11,7 @@ import { SentenceService } from './../sentence.service';
 export class SentenceEditComponent implements OnChanges {
 	model = new Sentence;
 	@Input() step: number;
+	getStep = 0;
 
 	constructor(private SentenceService: SentenceService) { }
 
@@ -19,6 +20,10 @@ export class SentenceEditComponent implements OnChanges {
 			.then(() => {
 				location.reload();
 			})
+	}
+
+	changeStep(step) {
+		this.getStep = step;
 	}
 
 	changeString(model: Sentence) {

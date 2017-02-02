@@ -45,7 +45,8 @@ export class SentenceTableComponent implements OnChanges {
 		this.SentenceService.updateSentence(this.model)
 			.then(() => {
 				this.getData = '';
-				this.getAllSentence();
+				if(this.model.step === 0)	this.getAllSentence();
+				if(this.model.step !== 0) this.getStepSentence(this.model.step)
 			})
 	}
 
