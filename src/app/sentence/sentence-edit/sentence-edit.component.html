@@ -1,6 +1,14 @@
 <div class="col-md-6 col-md-offset-3">
 	<form name="form" (ngSubmit)="f.form.valid && add()" #f="ngForm" novalidate>
 		<div class="form-group" [ngClass]="{ 'has-error': f.submitted && !name.valid }">
+			<label for="step">Step: {{model.step}}</label>
+			<select class="form-control" [(ngModel)]="model.step" #step="ngModel" required	name="step">
+				<option value="1">Step 1</option>
+				<option value="2">Step 2</option>
+				<option value="3">Step 3</option>
+			</select>
+		</div>
+		<div class="form-group" [ngClass]="{ 'has-error': f.submitted && !name.valid }">
 			<label for="name">문제</label>
 			<input type="text" class="form-control" name="name" [(ngModel)]="model.name" #name="ngModel" required />
 		</div>
@@ -13,20 +21,24 @@
 			<input type="text" class="form-control" name="subject" [(ngModel)]="model.subject" #subject="ngModel" required />
 		</div>
 		<div class="form-group" [ngClass]="{ 'has-error': f.submitted && !name.valid }">
-			<label for="verb">동사</label>
-			<input type="text" class="form-control" name="verb" [(ngModel)]="model.verb" #verb="ngModel" required />
+			<label for="post1">조사</label>
+			<input type="text" class="form-control" name="post1" [(ngModel)]="model.post1" #post1="ngModel" required />
 		</div>
-		<div class="form-group" [ngClass]="{ 'has-error': f.submitted && !name.valid }">
+		<div *ngIf="model.step === 2" class="form-group" [ngClass]="{ 'has-error': f.submitted && !name.valid }">
+			<label for="object">목적어</label>
+			<input type="text" class="form-control" name="object" [(ngModel)]="model.object" #object="ngModel" required />
+		</div>
+		<div *ngIf="model.step === 3" class="form-group" [ngClass]="{ 'has-error': f.submitted && !name.valid }">
 			<label for="complement">보어</label>
 			<input type="text" class="form-control" name="complement" [(ngModel)]="model.complement" #complement="ngModel" required />
 		</div>
+		<div *ngIf="model.step === 2 || model.step === 3" class="form-group" [ngClass]="{ 'has-error': f.submitted && !name.valid }">
+			<label for="post2">조사</label>
+			<input type="text" class="form-control" name="post2" [(ngModel)]="model.post2" #post2="ngModel" required />
+		</div>
 		<div class="form-group" [ngClass]="{ 'has-error': f.submitted && !name.valid }">
-			<label for="step">Step: {{model.step}}</label>
-			<select class="form-control" [(ngModel)]="model.step" #step="ngModel" required	name="step">
-				<option value="1">Step 1</option>
-				<option value="2">Step 2</option>
-				<option value="3">Step 3</option>
-			</select>
+			<label for="verb">동사</label>
+			<input type="text" class="form-control" name="verb" [(ngModel)]="model.verb" #verb="ngModel" required />
 		</div>
 		<div class="form-group" [ngClass]="{ 'has-error': f.submitted && !name.valid }">
 			<label for="disable">활성화</label>

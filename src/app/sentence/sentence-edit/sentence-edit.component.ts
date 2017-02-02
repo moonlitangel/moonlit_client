@@ -17,14 +17,17 @@ export class SentenceEditComponent implements OnChanges {
 	add(model): void {
 		this.SentenceService.createSentence(this.model)
 			.then(() => {
-				location.reload();
+				console.log(this.model);
 			})
 	}
 
 	changeString(model: Sentence) {
-		this.model.complement = model.complement.toString().split(/\s*,\s|,/);
-		this.model.verb = model.verb.toString().split(/\s*,\s|,/);
-		this.model.subject = model.subject.toString().split(/\s*,\s|,/);
+		if(model.complement) this.model.complement = model.complement.toString().split(/\s*,\s|,/);
+		if(model.verb) this.model.verb = model.verb.toString().split(/\s*,\s|,/);
+		if(model.subject) this.model.subject = model.subject.toString().split(/\s*,\s|,/);
+		if(model.object) this.model.object = model.object.toString().split(/\s*,\s|,/);
+		if(model.post1) this.model.post1 = model.post1.toString().split(/\s*,\s|,/);
+		if(model.post2) this.model.post2 = model.post2.toString().split(/\s*,\s|,/);
 	}
 
 	ngOnChanges() {

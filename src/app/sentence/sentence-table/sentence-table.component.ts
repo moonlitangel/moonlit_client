@@ -15,6 +15,7 @@ export class SentenceTableComponent implements OnChanges {
 	addData = false;
 	@Input() step: number;
 	getStep: false;
+	modifyPro = false;
 
 	constructor(private SentenceService: SentenceService) { }
 
@@ -49,10 +50,12 @@ export class SentenceTableComponent implements OnChanges {
 	}
 
 	changeString(model: Sentence) {
-		this.model.complement = model.complement.toString().split(/\s*,\s*|,/);
-		this.model.verb = model.verb.toString().split(/\s*,\s*|,/);
-		this.model.subject = model.subject.toString().split(/\s*,\s*|,/);
-		console.log(this.model);
+		if(model.complement) this.model.complement = model.complement.toString().split(/\s*,\s|,/);
+		if(model.verb) this.model.verb = model.verb.toString().split(/\s*,\s|,/);
+		if(model.subject) this.model.subject = model.subject.toString().split(/\s*,\s|,/);
+		if(model.object) this.model.object = model.object.toString().split(/\s*,\s|,/);
+		if(model.post1) this.model.post1 = model.post1.toString().split(/\s*,\s|,/);
+		if(model.post2) this.model.post2 = model.post2.toString().split(/\s*,\s|,/);
 	}
 
 	deleteSentence(Sentence: Sentence): void {
@@ -60,6 +63,10 @@ export class SentenceTableComponent implements OnChanges {
 			.then(() => {
 				this.results = this.results.filter(h => h !== Sentence);
 			})
+	}
+
+	modifypro() {
+		this.modifyPro = true;
 	}
 
 	addSentence() {
