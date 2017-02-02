@@ -17,7 +17,7 @@ export class SentenceEditComponent implements OnChanges {
 	add(model): void {
 		this.SentenceService.createSentence(this.model)
 			.then(() => {
-				console.log(this.model);
+				location.reload();
 			})
 	}
 
