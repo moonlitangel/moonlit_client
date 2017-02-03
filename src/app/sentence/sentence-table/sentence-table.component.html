@@ -2,12 +2,12 @@
 	<div class="card">
 		<div class="card-block">
 			<div class="text-right">
-				<!--<button *ngIf="!modifyPro" (click)="modifypro()" class="btn btn-primary btn-sm">우선순위수정</button>
-				<button *ngIf="modifyPro" (click)="modifypro()" class="btn btn-primary btn-sm">완료</button>-->
+				<button *ngIf="!modifyPro" (click)="modifypro()" class="btn btn-primary btn-sm">우선순위수정</button>
+				<button *ngIf="modifyPro" (click)="exitpro()" class="btn btn-primary btn-sm">완료</button>
 			</div>
 			<table class="table table-bordered table-striped table-condensed" *ngIf="results" border="1">
 				<thead>
-					<tr *ngIf="step === 0">
+					<tr *ngIf="step === 0 && !modifyPro">
 						<th>번호</th>
 						<th>문제</th>
 						<th>답</th>
@@ -21,7 +21,7 @@
 						<th>수정</th>
 						<th>삭제</th>
 					</tr>
-					<tr *ngIf="step !== 0">
+					<tr *ngIf="step !== 0 && !modifyPro">
 						<th>번호</th>
 						<th>문제</th>
 						<th>답</th>
@@ -34,6 +34,32 @@
 						<th>활성화</th>
 						<th>수정</th>
 						<th>삭제</th>
+					</tr>
+					<tr *ngIf="step === 0 && modifyPro">
+						<th colspan="2">우선순위수정</th>
+						<th>번호</th>
+						<th>문제</th>
+						<th>답</th>
+						<th>주어</th>
+						<th>조사</th>
+						<th>목적어</th>
+						<th>보어</th>
+						<th>조사</th>
+						<th>동사</th>
+						<th>활성화</th>
+					</tr>
+					<tr *ngIf="step !== 0 && modifyPro">
+						<th colspan="2">우선순위수정</th>
+						<th>번호</th>
+						<th>문제</th>
+						<th>답</th>
+						<th>주어</th>
+						<th>조사</th>
+						<th *ngIf="step === 2">목적어</th>
+						<th *ngIf="step === 3">보어</th>
+						<th *ngIf="step === 2 || step === 3">조사</th>
+						<th>동사</th>
+						<th>활성화</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -92,8 +118,8 @@
 							</div>
 						</td>
 						<!--기본 상태의 테이블-->
-						<!--<td *ngIf="modifyPro"><button class="btn btn-null"><i class="fa fa-2x fa-caret-square-o-up"></i></button></td>
-						<td *ngIf="modifyPro"><button class="btn btn-null"><i class="fa fa-2x fa-caret-square-o-down"></i></button></td>-->
+						<td *ngIf="modifyPro"><button *ngIf="i !== 0" class="btn btn-null" (click)="upPro(i)"><i class="fa fa-2x fa-caret-square-o-up"></i></button></td>
+						<td *ngIf="modifyPro"><button *ngIf="i !== results.length-1" class="btn btn-null" (click)="downPro(i)"><i class="fa fa-2x fa-caret-square-o-down"></i></button></td>
 						<td *ngIf="p._id !== getData && step !== 0">{{i+1}}
 							<div *ngIf="p.subject.length > 1">주어문제</div>
 							<div *ngIf="p.post1.length > 1 || p.post2.length > 1">조사문제</div>

@@ -1,5 +1,7 @@
 import { Component, Input, OnChanges, SimpleChange } from '@angular/core';
 
+import 'rxjs/add/operator/toPromise';
+
 import { Sentence } from './../sentence';
 import { SentenceService } from './../sentence.service';
 
@@ -16,6 +18,8 @@ export class SentenceTableComponent implements OnChanges {
 	@Input() step: number;
 	getStep: false;
 	modifyPro = false;
+	change1: Sentence;
+	change2: Sentence;
 
 	constructor(private SentenceService: SentenceService) { }
 
@@ -46,7 +50,14 @@ export class SentenceTableComponent implements OnChanges {
 			.then(() => {
 				this.getData = '';
 				if(this.model.step === 0)	this.getAllSentence();
-				if(this.model.step !== 0) this.getStepSentence(this.model.step)
+				if(this.model.step !== 0) this.getStepSentence(this.model.step);
+			})
+	}
+
+	updatePriority(): void {
+		this.SentenceService.updateSentence(this.change1)
+			.then(() => {
+				this.SentenceService.updateSentence(this.change2);
 			})
 	}
 
@@ -66,8 +77,38 @@ export class SentenceTableComponent implements OnChanges {
 			})
 	}
 
+	upPro(pro: number) {
+		this.change1 = this.results[pro];
+		this.change2 = this.results[pro-1];
+		var tempPro1 = this.change1.priority;
+		var tempPro2 = this.change2.priority;
+		this.change1.priority = tempPro2;
+		this.change2.priority = tempPro1;
+		var temp = this.results[pro];
+		this.updatePriority();
+		this.results[pro] = this.results[pro-1];
+		this.results[pro-1] = temp;
+	}
+
+	downPro(pro: number) {
+		this.change1 = this.results[pro];
+		this.change2 = this.results[pro+1];
+		var tempPro1 = this.change1.priority;
+		var tempPro2 = this.change2.priority;
+		this.change1.priority = tempPro2;
+		this.change2.priority = tempPro1;
+		var temp = this.results[pro];
+		this.updatePriority();
+		this.results[pro] = this.results[pro+1];
+		this.results[pro+1] = temp;
+	}
+
 	modifypro() {
 		this.modifyPro = true;
+	}
+
+	exitpro() {
+		this.modifyPro = false;
 	}
 
 	addSentence() {
