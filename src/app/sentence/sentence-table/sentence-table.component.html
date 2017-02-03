@@ -94,11 +94,29 @@
 						<!--기본 상태의 테이블-->
 						<!--<td *ngIf="modifyPro"><button class="btn btn-null"><i class="fa fa-2x fa-caret-square-o-up"></i></button></td>
 						<td *ngIf="modifyPro"><button class="btn btn-null"><i class="fa fa-2x fa-caret-square-o-down"></i></button></td>-->
-						<td *ngIf="p._id !== getData && step !== 0">{{i+1}}</td>
-						<td *ngIf="p._id !== getData && step === 0">Step: {{p.step}}</td>
+						<td *ngIf="p._id !== getData && step !== 0">{{i+1}}
+							<div *ngIf="p.subject.length > 1">주어문제</div>
+							<div *ngIf="p.post1.length > 1 || p.post2.length > 1">조사문제</div>
+							<div *ngIf="p.object.length > 1">목적어문제</div>
+							<div *ngIf="p.complement.length > 1">보어문제</div>
+							<div *ngIf="p.verb.length > 1">동사문제</div>
+						</td>
+						<td *ngIf="p._id !== getData && step === 0">Step: {{p.step}} /
+							<div *ngIf="p.subject.length > 1">주어문제</div>
+							<div *ngIf="p.post1.length > 1 || p.post2.length > 1">조사문제</div>
+							<div *ngIf="p.object.length > 1">목적어문제</div>
+							<div *ngIf="p.complement.length > 1">보어문제</div>
+							<div *ngIf="p.verb.length > 1">동사문제</div>
+						</td>
 						<td *ngIf="p._id !== getData">{{p.name}}</td>
 						<td *ngIf="p._id !== getData">{{p.answer}}</td>
-						<td *ngIf="p._id !== getData">{{p.subject}}</td>
+						<td *ngIf="p._id !== getData">{{p.subject}}
+							<!--<div class="form-group">
+								<select class="form-control" id="subject" required	name="subject">
+									<option *ngFor="let s of p.subject" [value]="s">{{s}}</option>
+								</select>
+							</div>-->
+						</td>
 						<td *ngIf="p._id !== getData">{{p.post1}}</td>
 						<td *ngIf="p._id !== getData && step === 0">{{p.object}}</td>
 						<td *ngIf="p._id !== getData && step === 0">{{p.complement}}</td>
