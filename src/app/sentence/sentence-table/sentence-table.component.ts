@@ -45,6 +45,24 @@ export class SentenceTableComponent implements OnChanges {
 			})
 	}
 
+	confirmDelete(Sentence: Sentence) :void {
+		var r = confirm("삭제하시겠습니까?");
+		if(r === true) {
+			this.deleteSentence(Sentence);
+			console.log("삭제", Sentence);
+		} else {
+			console.log("취소");
+		}
+	}
+
+	closeSubmit(): void{
+		this.getData = '';
+	}
+
+	closeAdd(): void{
+		this.addData = false;
+	}
+
 	updateSentence(Sentence: Sentence): void {
 		this.SentenceService.updateSentence(this.model)
 			.then(() => {

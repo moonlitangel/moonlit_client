@@ -112,9 +112,10 @@
 										</label>
 									</div>
 									<div class="form-group">
-										<p><button [disabled]="loading" (click)="changeString(model)" class="btn btn-primary btn-sm">Submit</button></p>
+										<p><button [disabled]="loading" (click)="changeString(model)" class="btn btn-primary btn-sm">수정</button></p>
 									</div>
 								</form>
+								<p><button [disabled]="loading" (click)="closeSubmit()" class="btn btn-primary btn-sm">닫기</button></p>
 							</div>
 						</td>
 						<!--기본 상태의 테이블-->
@@ -153,7 +154,7 @@
 						<td *ngIf="p._id !== getData">{{p.verb}}</td>
 						<td *ngIf="p._id !== getData">{{p.disable}}</td>
 						<td *ngIf="p._id !== getData && !modifyPro"><button class="btn btn-sm btn-primary" (click)="getSentence(p._id); $event.stopPropagation()">수정</button></td>
-						<td *ngIf="p._id !== getData && !modifyPro"><button class="btn btn-sm btn-danger" (click)="deleteSentence(p); $event.stopPropagation()">삭제</button></td>
+						<td *ngIf="p._id !== getData && !modifyPro"><button class="btn btn-sm btn-danger" (click)="confirmDelete(p); $event.stopPropagation()">삭제</button></td>
 					</tr>
 					<!-- 추가를 위한 입력 폼 -->
 					<tr *ngIf="addData">
@@ -163,8 +164,11 @@
 					</tr>
 				</tbody>
 			</table>
-			<div class="text-right">
+			<div *ngIf="!addData" class="text-right">
 				<button (click)="addSentence()" class="btn btn-primary btn-sm">Add</button>
+			</div>
+			<div *ngIf="addData" class="text-right">
+				<button (click)="closeAdd()" class="btn btn-primary btn-sm">닫기</button>
 			</div>
 		</div>
 	</div>
