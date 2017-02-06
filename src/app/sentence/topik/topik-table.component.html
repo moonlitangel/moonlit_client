@@ -37,9 +37,10 @@
 									<ng2-datepicker name="time" #time="ngModel" [(ngModel)]="model.time" [options]="calendarOptions"></ng2-datepicker>
 								</div>
 								<div class="form-group">
-									<p><button [disabled]="loading" (click)="changeString(model)" class="btn btn-primary btn-sm">Submit</button></p>
+									<p><button [disabled]="loading" (click)="changeString(model)" class="btn btn-primary btn-sm">수정</button></p>
 								</div>
 							</form>
+							<p><button [disabled]="loading" (click)="closeSubmit()" class="btn btn-primary btn-sm">닫기</button></p>
 						</td>
 						<!--기본 상태의 테이블-->
 						<td *ngIf="p._id !== getData">{{p.topiknum}}</td>
@@ -47,7 +48,7 @@
 						<td *ngIf="p._id !== getData">{{p.answer}}</td>
 						<td *ngIf="p._id !== getData">{{p.time | date: 'yyyy/MM/dd'}}</td>
 						<td *ngIf="p._id !== getData"><button class="btn btn-sm btn-primary" (click)="getOneTopik(p._id); $event.stopPropagation()">수정</button></td>
-						<td *ngIf="p._id !== getData"><button class="btn btn-sm btn-danger" (click)="deleteTopik(p); $event.stopPropagation()">삭제</button></td>
+						<td *ngIf="p._id !== getData"><button class="btn btn-sm btn-danger" (click)="confirmDelete(p); $event.stopPropagation()">삭제</button></td>
 					</tr>
 					<!-- 추가를 위한 입력 폼 -->
 					<tr *ngIf="addData">
@@ -57,8 +58,11 @@
 					</tr>
 				</tbody>
 			</table>
-			<div class="text-right">
+			<div *ngIf="!addData" class="text-right">
 				<button (click)="addTopik()" class="btn btn-primary btn-sm">Add</button>
+			</div>
+			<div *ngIf="addData" class="text-right">
+				<button (click)="closeAdd()" class="btn btn-primary btn-sm">닫기</button>
 			</div>
 		</div>
 	</div>

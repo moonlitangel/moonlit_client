@@ -69,6 +69,24 @@ export class TopikTableComponent implements OnChanges {
 		this.addData = true;
 	}
 
+	confirmDelete(Topik: Topik) :void {
+		var r = confirm("삭제하시겠습니까?");
+		if(r === true) {
+			this.deleteTopik(Topik);
+			console.log("삭제", Topik);
+		} else {
+			console.log("취소");
+		}
+	}
+
+	closeSubmit(): void{
+		this.getData = '';
+	}
+
+	closeAdd(): void{
+		this.addData = false;
+	}
+
 	ngOnChanges() {
 		this.getTopik(this.time);
 	}

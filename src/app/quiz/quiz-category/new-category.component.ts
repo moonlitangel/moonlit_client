@@ -73,6 +73,24 @@ export class NewCategoryComponent implements OnInit {
 		}
 	}
 
+	confirmDelete(QuizCategory: QuizCategory) :void {
+		var r = confirm("삭제하시겠습니까?");
+		if(r === true) {
+			this.deleteCategory(QuizCategory);
+			console.log("삭제", QuizCategory);
+		} else {
+			console.log("취소");
+		}
+	}
+
+	closeSubmit(): void{
+		this.getData = '';
+	}
+
+	closeAdd(): void{
+		this.addData = false;
+	}
+
   addCategory() {
 		this.addData = true;
 	}
