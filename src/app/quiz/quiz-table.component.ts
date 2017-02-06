@@ -20,6 +20,7 @@ export class QuizTableComponent implements OnChanges {
 	addData = false;
 	@Input() category: string;
 	getCategory = false;
+	modifyPro = false;
 
 	constructor(private QuizService: QuizService) { }
 
@@ -75,6 +76,47 @@ export class QuizTableComponent implements OnChanges {
 
 	addQuiz() {
 		this.addData = true;
+	}
+
+	updatePriority(): void {
+		this.QuizService.updateQuiz(this.change1)
+			.then(() => {
+				this.QuizService.updateQuiz(this.change2);
+			})
+	}
+
+	upPro(pro: number) {
+		this.change1 = this.results[pro];
+		this.change2 = this.results[pro-1];
+		var tempPro1 = this.change1.priority;
+		var tempPro2 = this.change2.priority;
+		this.change1.priority = tempPro2;
+		this.change2.priority = tempPro1;
+		var temp = this.results[pro];
+		this.updatePriority();
+		this.results[pro] = this.results[pro-1];
+		this.results[pro-1] = temp;
+	}
+
+	downPro(pro: number) {
+		this.change1 = this.results[pro];
+		this.change2 = this.results[pro+1];
+		var tempPro1 = this.change1.priority;
+		var tempPro2 = this.change2.priority;
+		this.change1.priority = tempPro2;
+		this.change2.priority = tempPro1;
+		var temp = this.results[pro];
+		this.updatePriority();
+		this.results[pro] = this.results[pro+1];
+		this.results[pro+1] = temp;
+	}
+
+	modifypro() {
+		this.modifyPro = true;
+	}
+
+	exitpro() {
+		this.modifyPro = false;
 	}
 
 	ngOnChanges() {

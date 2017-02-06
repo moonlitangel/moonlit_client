@@ -1,9 +1,13 @@
 <div>
 	<div class="card">
 		<div class="card-block">
+			<div class="text-right">
+				<button *ngIf="!modifyPro" (click)="modifypro()" class="btn btn-primary btn-sm">우선순위수정</button>
+				<button *ngIf="modifyPro" (click)="exitpro()" class="btn btn-primary btn-sm">완료</button>
+			</div>
 			<table class="table table-bordered table-striped table-condensed" *ngIf="results" border="1">
 				<thead>
-					<tr>
+					<tr *ngIf="!modifyPro">
 						<th>번호</th>
 						<th>이미지</th>
 						<th>카테고리</th>
@@ -13,11 +17,20 @@
 						<th>수정</th>
 						<th>삭제</th>
 					</tr>
+					<tr *ngIf="modifyPro">
+						<th colspan="2">우선순위수정</th>
+						<th>번호</th>
+						<th>이미지</th>
+						<th>카테고리</th>
+						<th>문제</th>
+						<th>답</th>
+						<th>활성화</th>
+					</tr>
 				</thead>
 				<tbody>
 					<tr *ngFor="let p of results; let i=index">
 						<!--수정 상태의 입력 폼-->
-						<td *ngIf="p._id === getData" colspan="8">
+						<td *ngIf="p._id === getData" colspan="100%">
 							<form name="form" (ngSubmit)="f.form.valid && updateQuiz()" #f="ngForm" novalidate>
 								<div class="col-md-1">
 									<label for="id">ID: </label> {{model._id}}
@@ -61,18 +74,20 @@
 							<p><button [disabled]="loading" (click)="closeSubmit()" class="btn btn-primary btn-sm">닫기</button></p>
 						</td>
 						<!--기본 상태의 테이블-->
+						<td *ngIf="modifyPro"><button *ngIf="i !== 0" class="btn btn-null" (click)="upPro(i)"><i class="fa fa-2x fa-caret-square-o-up"></i></button></td>
+						<td *ngIf="modifyPro"><button *ngIf="i !== results.length-1" class="btn btn-null" (click)="downPro(i)"><i class="fa fa-2x fa-caret-square-o-down"></i></button></td>
 						<td *ngIf="p._id !== getData">{{i+1}}</td>
 						<td *ngIf="p._id !== getData"><img class="img-responsive" height="150" *ngIf="p.img != null" src="http://52.175.147.246:3000/imgs/{{p.img}}">그림</td>
 						<td *ngIf="p._id !== getData">{{p.smallcat}}</td>
 						<td *ngIf="p._id !== getData">{{p.name}}</td>
 						<td *ngIf="p._id !== getData">{{p.answer}}</td>
 						<td *ngIf="p._id !== getData">{{p.disable}}</td>
-						<td *ngIf="p._id !== getData"><button class="btn btn-sm btn-primary" (click)="getQuiz(p.smallcat, p._id); $event.stopPropagation()">수정</button></td>
-						<td *ngIf="p._id !== getData"><button class="btn btn-sm btn-danger" (click)="confirmQuiz(p); $event.stopPropagation()">삭제</button></td>
+						<td *ngIf="p._id !== getData && !modifyPro"><button class="btn btn-sm btn-primary" (click)="getQuiz(p.smallcat, p._id); $event.stopPropagation()">수정</button></td>
+						<td *ngIf="p._id !== getData && !modifyPro"><button class="btn btn-sm btn-danger" (click)="confirmQuiz(p); $event.stopPropagation()">삭제</button></td>
 					</tr>
 					<!-- 추가를 위한 입력 폼 -->
 					<tr *ngIf="addData">
-						<td colspan="8">
+						<td colspan="100%">
 							<app-quiz-edit [category]="category"></app-quiz-edit>
 						</td>
 						<!--<h1>추가 폼을 넣을거야</h1>-->
