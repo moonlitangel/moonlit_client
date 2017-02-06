@@ -77,7 +77,7 @@
 						<td *ngIf="modifyPro"><button *ngIf="i !== 0" class="btn btn-null" (click)="upPro(i)"><i class="fa fa-2x fa-caret-square-o-up"></i></button></td>
 						<td *ngIf="modifyPro"><button *ngIf="i !== results.length-1" class="btn btn-null" (click)="downPro(i)"><i class="fa fa-2x fa-caret-square-o-down"></i></button></td>
 						<td *ngIf="p._id !== getData">{{i+1}}</td>
-						<td *ngIf="p._id !== getData"><img class="img-responsive" height="150" *ngIf="p.img != null" src="http://52.175.147.246:3000/imgs/{{p.img}}">그림</td>
+						<td *ngIf="p._id !== getData"><img class="img-responsive" height="150" *ngIf="p.img != null" src="http://52.175.147.246:3000/imgs/{{p.img}}"><a *ngIf="p.img == null">그림</a></td>
 						<td *ngIf="p._id !== getData">{{p.smallcat}}</td>
 						<td *ngIf="p._id !== getData">{{p.name}}</td>
 						<td *ngIf="p._id !== getData">{{p.answer}}</td>
