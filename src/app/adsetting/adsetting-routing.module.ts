@@ -5,7 +5,6 @@ import {
 } from '@angular/router';
 
 import { AdsettingComponent } from './adsetting.component';
-import { AdsettingTableComponent } from './adsetting-table.component';
 
 const routes: Routes = [
     {
@@ -13,16 +12,7 @@ const routes: Routes = [
         component: AdsettingComponent,
         data: {
             title: 'Adsetting'
-        },
-        children: [
-            {
-                path: '',
-                component: AdsettingTableComponent,
-                data: {
-                    title: 'Small Category'
-                }
-            }
-        ]
+        }
     }
 ];
 

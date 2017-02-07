@@ -1,0 +1,31 @@
+<div class="col-md-6 col-md-offset-3">
+	<form name="form" (ngSubmit)="f.form.valid && add()" #f="ngForm" novalidate>
+		<div class="form-group" [ngClass]="{ 'has-error': f.submitted && !title.valid }">
+			<label for="title">광고제목</label>
+			<input type="text" class="form-control" name="title" [(ngModel)]="model.title" #title="ngModel" required />
+		</div>
+		<div class="form-group" [ngClass]="{ 'has-error': f.submitted && !title.valid }">
+			<label for="link">광고링크</label>
+			<input type="text" class="form-control" name="link" [(ngModel)]="model.link" #link="ngModel" required />
+		</div>
+		<div class="form-group" [ngClass]="{ 'has-error': f.submitted && !title.valid }">
+			<label for="quiz">퀴즈ID</label>
+			<input type="text" class="form-control" name="quiz" [(ngModel)]="model.quiz" #quiz="ngModel" required />
+		</div>
+		<div class="form-group" [ngClass]="{ 'has-error': f.submitted && !title.valid }">
+			<div *ngIf="!getImg">
+				<label for="img-upload">이미지 업로드</label>
+				<input type="file" name="img-upload" ng2FileSelect [uploader]="uploader" />
+				<button type="button" class="btn btn-success btn-s" (click)="uploadFile()">
+					<span class="glyphicon glyphicon-upload"></span> 올리기
+				</button>
+			</div>
+			<div *ngIf="getImg">
+				<img src="{{imgurl}}">
+			</div>
+		</div>
+		<div class="form-group">
+			<button [disabled]="loading" class="btn btn-primary">생성하기</button>
+		</div>
+	</form>
+</div>

@@ -4,9 +4,13 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
+import { ShareModule } from './../share/share.module';
+
 import { AdsettingComponent } from './adsetting.component';
-import { AdsettingTableComponent } from './adsetting-table.component';
+import { AdTableComponent } from './ad-table/ad-table.component';
+import { AdEditComponent } from './ad-edit/ad-edit.component';
 import { AdsettingRoutingModule } from './adsetting-routing.module';
+import { AdService } from './ad.service';
 
 
 @NgModule({
@@ -14,8 +18,10 @@ import { AdsettingRoutingModule } from './adsetting-routing.module';
         CommonModule,
         FormsModule,
         AdsettingRoutingModule,
-        ChartsModule
+        ChartsModule,
+        ShareModule
     ],
-    declarations: [AdsettingComponent, AdsettingTableComponent]//, FileSelectDirective ]
+    declarations: [AdsettingComponent, AdTableComponent, AdEditComponent],
+    providers: [AdService]
 })
 export class AdsettingModule { }
