@@ -3,5 +3,5 @@ export class Ad {
 	title: string;
 	img: string;
 	link: string;
-	quiz: string;
+	quiz: string = 'Not found';
 }

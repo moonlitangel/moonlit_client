@@ -2,27 +2,41 @@ import { Component, Input, OnChanges, SimpleChange } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { QuizService } from './quiz.service';
+import { AdService } from './../adsetting/ad.service';
 
 import { Quiz } from './quiz';
+import { Ad } from './../adsetting/ad';
 
 @Component({
 	selector: 'app-quiz-table',
 	templateUrl: './quiz-table.component.html',
-	styleUrls: ['./quiz-table.component.scss']
+	styleUrls: ['./quiz-table.component.scss'],
+	providers: [AdService]
 })
 
 export class QuizTableComponent implements OnChanges {
 	results: Quiz[];
+	adResults: Ad[];
 	model: Quiz;
 	change1: Quiz;
 	change2: Quiz;
 	getData = '';
 	addData = false;
+	adText: string = 'Not found';
+	getAd: number;
 	@Input() category: string;
 	getCategory = false;
 	modifyPro = false;
 
-	constructor(private QuizService: QuizService) { }
+	constructor(
+		private QuizService: QuizService,
+		private AdService: AdService
+		) { }
+
+	getAllAd(): void{
+		this.AdService.getAllAd()
+			.then(results => this.adResults = results)
+	}
 
 	getAllQuiz(smallcat: string): void {
 		this.QuizService
@@ -58,6 +72,25 @@ export class QuizTableComponent implements OnChanges {
 		}
 	}
 
+	choiceAd(ad: any, quiz: any): void{
+		var r = confirm("이 광고를 추가하시겠습니까?");
+		if(r === true) {
+			ad.quiz = quiz._id;
+			quiz.ad = true;
+			this.AdService.updateAd(ad)
+				.then(() => {
+					this.QuizService.updateQuiz(quiz)
+						.then(() => {
+							this.getAd = -1;
+							this.getAllQuiz(quiz.smallcat);
+						});
+				});
+			console.log("추가합니다", ad, quiz);
+		} else {
+			console.log("취소");
+		}
+	}
+
 	closeSubmit(): void{
 		this.getData = '';
 	}
@@ -76,6 +109,24 @@ export class QuizTableComponent implements OnChanges {
 
 	addQuiz() {
 		this.addData = true;
+	}
+
+	addAd(num: number) {
+		this.getAd = num;
+		this.getAllAd();
+	}
+
+	deleteAd(Quiz: Quiz): void {
+		Quiz.ad = false;
+		this.QuizService.updateQuiz(Quiz)
+			.then(() => {
+				this.AdService.getQuizAd(Quiz._id)
+					.then(results => {
+						results.quiz = 'Not found';
+						this.AdService.updateAd(results);
+					})
+				this.getAllQuiz(Quiz.smallcat);
+			});
 	}
 
 	updatePriority(): void {

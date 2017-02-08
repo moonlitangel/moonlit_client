@@ -6,4 +6,5 @@ export class Quiz {
 	smallcat: string;
 	img: string;
 	priority: number;
+	ad: boolean = false;
 }

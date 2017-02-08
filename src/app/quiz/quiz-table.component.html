@@ -14,6 +14,7 @@
 						<th>문제</th>
 						<th>답</th>
 						<th>활성화</th>
+						<th>광고추가</th>
 						<th>수정</th>
 						<th>삭제</th>
 					</tr>
@@ -73,17 +74,43 @@
 							</form>
 							<p><button [disabled]="loading" (click)="closeSubmit()" class="btn btn-primary btn-sm">닫기</button></p>
 						</td>
+						<!-- 광고 추가 테이블 -->
+						<td *ngIf="i === getAd" colspan="100%">
+							<div class="row">
+								<div *ngFor="let ad of adResults; let list = index">
+									<div class="clearfix" *ngIf="list % 4 == 0"></div>
+									<div class="col-md-3" *ngIf="ad.quiz === adText">
+										<div class="card card-inverse card-primary" (click)="choiceAd(ad, p)">
+											<div class="card-header">{{ad.title}}</div>
+											<div class="card-block">
+												<img class="img-responsive" width="100%" src="http://52.175.147.246:3000/imgs/{{ad.img}}">
+											</div>
+										</div>
+									</div>
+									<div class="col-md-3" *ngIf="ad.quiz !== adText">
+										<div class="card card-inverse card-warning">
+											<div class="card-header">{{ad.title}}-사용중</div>
+											<div class="card-block">
+												<img class="img-responsive" width="100%" src="http://52.175.147.246:3000/imgs/{{ad.img}}">
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</td>
 						<!--기본 상태의 테이블-->
 						<td *ngIf="modifyPro"><button *ngIf="i !== 0" class="btn btn-null" (click)="upPro(i)"><i class="fa fa-2x fa-caret-square-o-up"></i></button></td>
 						<td *ngIf="modifyPro"><button *ngIf="i !== results.length-1" class="btn btn-null" (click)="downPro(i)"><i class="fa fa-2x fa-caret-square-o-down"></i></button></td>
-						<td *ngIf="p._id !== getData">{{i+1}}</td>
-						<td *ngIf="p._id !== getData"><img class="img-responsive" height="150" *ngIf="p.img != null" src="http://52.175.147.246:3000/imgs/{{p.img}}"><a *ngIf="p.img == null">그림</a></td>
-						<td *ngIf="p._id !== getData">{{p.smallcat}}</td>
-						<td *ngIf="p._id !== getData">{{p.name}}</td>
-						<td *ngIf="p._id !== getData">{{p.answer}}</td>
-						<td *ngIf="p._id !== getData">{{p.disable}}</td>
-						<td *ngIf="p._id !== getData && !modifyPro"><button class="btn btn-sm btn-primary" (click)="getQuiz(p.smallcat, p._id); $event.stopPropagation()">수정</button></td>
-						<td *ngIf="p._id !== getData && !modifyPro"><button class="btn btn-sm btn-danger" (click)="confirmQuiz(p); $event.stopPropagation()">삭제</button></td>
+						<td *ngIf="p._id !== getData && getAd !== i">{{i+1}}</td>
+						<td *ngIf="p._id !== getData && getAd !== i"><img class="img-responsive" height="150" *ngIf="p.img != null" src="http://52.175.147.246:3000/imgs/{{p.img}}"><a *ngIf="p.img == null">그림</a></td>
+						<td *ngIf="p._id !== getData && getAd !== i">{{p.smallcat}}</td>
+						<td *ngIf="p._id !== getData && getAd !== i">{{p.name}}</td>
+						<td *ngIf="p._id !== getData && getAd !== i">{{p.answer}}</td>
+						<td *ngIf="p._id !== getData && getAd !== i">{{p.disable}}</td>
+						<td *ngIf="p._id !== getData && !modifyPro && getAd !== i && p.ad"><button class="btn btn-sm btn-warning" (click)="deleteAd(p); $event.stopPropagation()">광고제거</button></td>
+						<td *ngIf="p._id !== getData && !modifyPro && getAd !== i && !p.ad"><button class="btn btn-sm btn-primary" (click)="addAd(i); $event.stopPropagation()">광고추가</button></td>
+						<td *ngIf="p._id !== getData && !modifyPro && getAd !== i"><button class="btn btn-sm btn-primary" (click)="getQuiz(p.smallcat, p._id); $event.stopPropagation()">수정</button></td>
+						<td *ngIf="p._id !== getData && !modifyPro && getAd !== i"><button class="btn btn-sm btn-danger" (click)="confirmQuiz(p); $event.stopPropagation()">삭제</button></td>
 					</tr>
 					<!-- 추가를 위한 입력 폼 -->
 					<tr *ngIf="addData">
