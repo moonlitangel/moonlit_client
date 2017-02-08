@@ -9,10 +9,6 @@
 			<input type="text" class="form-control" name="link" [(ngModel)]="model.link" #link="ngModel" required />
 		</div>
 		<div class="form-group" [ngClass]="{ 'has-error': f.submitted && !title.valid }">
-			<label for="quiz">퀴즈ID</label>
-			<input type="text" class="form-control" name="quiz" [(ngModel)]="model.quiz" #quiz="ngModel" required />
-		</div>
-		<div class="form-group" [ngClass]="{ 'has-error': f.submitted && !title.valid }">
 			<div *ngIf="!getImg">
 				<label for="img-upload">이미지 업로드</label>
 				<input type="file" name="img-upload" ng2FileSelect [uploader]="uploader" />

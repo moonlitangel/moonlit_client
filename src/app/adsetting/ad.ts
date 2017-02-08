@@ -4,4 +4,5 @@ export class Ad {
 	img: string;
 	link: string;
 	quiz: string = 'Not found';
+	quizinfo: string;
 }

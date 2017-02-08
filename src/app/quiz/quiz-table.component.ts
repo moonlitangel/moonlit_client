@@ -77,6 +77,7 @@ export class QuizTableComponent implements OnChanges {
 		if(r === true) {
 			ad.quiz = quiz._id;
 			quiz.ad = true;
+			ad.quizinfo = quiz.smallcat + ' / ' + quiz.name;
 			this.AdService.updateAd(ad)
 				.then(() => {
 					this.QuizService.updateQuiz(quiz)
@@ -123,6 +124,7 @@ export class QuizTableComponent implements OnChanges {
 				this.AdService.getQuizAd(Quiz._id)
 					.then(results => {
 						results.quiz = 'Not found';
+						results.quizinfo = '';
 						this.AdService.updateAd(results);
 					})
 				this.getAllQuiz(Quiz.smallcat);
