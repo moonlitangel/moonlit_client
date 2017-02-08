@@ -23,7 +23,7 @@ export class QuizTableComponent implements OnChanges {
 	getData = '';
 	addData = false;
 	adText: string = 'Not found';
-	getAd: number;
+	getAd: number = -1;
 	@Input() category: string;
 	getCategory = false;
 	modifyPro = false;
