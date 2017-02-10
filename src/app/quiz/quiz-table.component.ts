@@ -118,17 +118,22 @@ export class QuizTableComponent implements OnChanges {
 	}
 
 	deleteAd(Quiz: Quiz): void {
-		Quiz.ad = false;
-		this.QuizService.updateQuiz(Quiz)
-			.then(() => {
-				this.AdService.getQuizAd(Quiz._id)
-					.then(results => {
-						results.quiz = 'Not found';
-						results.quizinfo = '';
-						this.AdService.updateAd(results);
-					})
-				this.getAllQuiz(Quiz.smallcat);
-			});
+		var r = confirm("광고를 제거하시겠습니까?")
+		if(r === true) {
+			Quiz.ad = false;
+			this.QuizService.updateQuiz(Quiz)
+				.then(() => {
+					this.AdService.getQuizAd(Quiz._id)
+						.then(results => {
+							results.quiz = 'Not found';
+							results.quizinfo = '';
+							this.AdService.updateAd(results);
+						})
+					this.getAllQuiz(Quiz.smallcat);
+				});
+		} else {
+			console.log("취소");
+		}
 	}
 
 	updatePriority(): void {
