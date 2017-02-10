@@ -6,8 +6,8 @@ import { Progress } from './progress';
 
 @Injectable()
 export class ProgressService {
-
-	private headers = new Headers({ 'Content-Type': 'application/json' });
+	private token = localStorage.getItem('currentUser');
+	private headers = new Headers({ 'Content-Type': 'application/json', 'x-access-token': this.token });
 	private ProgressUrl = 'http://52.175.147.246:3000/api/progress';
 	private ApiUrl = 'http://52.175.147.246:3000/api';
 
@@ -35,7 +35,7 @@ export class ProgressService {
 			.catch(this.handleError);
 	}
 
-	createProgress(Progress: Progress): Promise<Progress> {
+	createProgress(Progress: Progress): Promise<void> {
 		return this.http.post(this.ProgressUrl, Progress, { headers: this.headers })
 			.toPromise()
 			.then(res => {
@@ -45,7 +45,7 @@ export class ProgressService {
 			.catch(this.handleError);
 	}
 
-	updateProgress(Progress: Progress): Promise<Progress> {
+	updateProgress(Progress: Progress): Promise<void> {
 		const url = `${this.ProgressUrl}/${Progress.user}`;
 		return this.http.put(url, JSON.stringify(Progress), { headers: this.headers })
 			.toPromise()

@@ -6,15 +6,15 @@ import { QuizCategory } from './quiz-category/quiz-category';
 
 @Injectable()
 export class QuizService {
-
-	private headers = new Headers({ 'Content-Type': 'application/json' });
+	private token = localStorage.getItem('currentUser');
+	private headers = new Headers({ 'Content-Type': 'application/json', 'x-access-token': this.token });
 	private QuizUrl = 'http://52.175.147.246:3000/api/quiz';
 	private ApiUrl = 'http://52.175.147.246:3000/api';
 
 	constructor(private http: Http) { }
 	getAllQuiz(smallcat: string): Promise<Quiz[]> {
 		const url = `${this.QuizUrl}/${smallcat}`;
-		return this.http.get(url)
+		return this.http.get(url, { headers: this.headers })
 			.toPromise()
 			.then(response => response.json() as Quiz[])
 			.catch(this.handleError);
@@ -22,13 +22,13 @@ export class QuizService {
 
 	getQuiz(smallcat: string, id: string): Promise<Quiz> {
 		const url = `${this.QuizUrl}/${smallcat}/${id}`;
-		return this.http.get(url)
+		return this.http.get(url, { headers: this.headers })
 			.toPromise()
 			.then(response => response.json() as Quiz)
 			.catch(this.handleError);
 	}
 
-	createQuiz(Quiz: Quiz): Promise<Quiz> {
+	createQuiz(Quiz: Quiz): Promise<void> {
 		return this.http.post(this.QuizUrl, Quiz, { headers: this.headers })
 			.toPromise()
 			.then(res => {
@@ -38,7 +38,7 @@ export class QuizService {
 			.catch(this.handleError);
 	}
 
-	updateQuiz(Quiz: Quiz): Promise<Quiz> {
+	updateQuiz(Quiz: Quiz): Promise<void> {
 		const url = `${this.QuizUrl}/${Quiz._id}`;
 		return this.http.put(url, JSON.stringify(Quiz), { headers: this.headers })
 			.toPromise()
@@ -59,7 +59,7 @@ export class QuizService {
 
 	getCategory(): Promise<QuizCategory[]> {
 		const url = `${this.ApiUrl}/category`;
-		return this.http.get(url)
+		return this.http.get(url, { headers: this.headers })
 			.toPromise()
 			.then(response => response.json() as QuizCategory[])
 			.catch(this.handleError);
@@ -67,7 +67,7 @@ export class QuizService {
 
 	getOneCategory(name: string): Promise<QuizCategory[]> {
 		const url = `${this.ApiUrl}/category/${name}`;
-		return this.http.get(url)
+		return this.http.get(url, { headers: this.headers })
 			.toPromise()
 			.then(response => response.json() as QuizCategory[])
 			.catch(this.handleError);
@@ -75,13 +75,13 @@ export class QuizService {
 
 	getSmallCategory(name: string): Promise<QuizCategory> {
 		const url = `${this.ApiUrl}/smallcat/${name}`;
-		return this.http.get(url)
+		return this.http.get(url, { headers: this.headers })
 			.toPromise()
 			.then(response => response.json() as QuizCategory)
 			.catch(this.handleError);
 	}
 
-	createCategory(QuizCategory: QuizCategory): Promise<QuizCategory> {
+	createCategory(QuizCategory: QuizCategory): Promise<void> {
 		const url = `${this.ApiUrl}/category/`;
 		return this.http.post(url, JSON.stringify(QuizCategory), { headers: this.headers })
 			.toPromise()
@@ -92,7 +92,7 @@ export class QuizService {
 			.catch(this.handleError);
 	}
 
-	updateCategory(QuizCategory: QuizCategory): Promise<QuizCategory> {
+	updateCategory(QuizCategory: QuizCategory): Promise<void> {
 		const url = `${this.ApiUrl}/smallcat/${QuizCategory._id}`;
 		return this.http.put(url, JSON.stringify(QuizCategory), { headers: this.headers })
 			.toPromise()

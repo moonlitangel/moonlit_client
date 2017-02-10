@@ -5,15 +5,15 @@ import { Ad } from './ad';
 
 @Injectable()
 export class AdService {
-
-	private headers = new Headers({ 'Content-Type': 'application/json' });
+	private token = localStorage.getItem('currentUser');
+	private headers = new Headers({ 'Content-Type': 'application/json', 'x-access-token': this.token });
 	private AdUrl = 'http://52.175.147.246:3000/api/ad';
 	private ApiUrl = 'http://52.175.147.246:3000/api';
 
 	constructor(private http: Http) { }
 	getAllAd(): Promise<Ad[]> {
 		const url = `${this.AdUrl}`;
-		return this.http.get(url)
+		return this.http.get(url, { headers: this.headers })
 			.toPromise()
 			.then(response => response.json() as Ad[])
 			.catch(this.handleError);
@@ -21,7 +21,7 @@ export class AdService {
 
 	getAd(id: string): Promise<Ad> {
 		const url = `${this.AdUrl}/${id}`;
-		return this.http.get(url)
+		return this.http.get(url, { headers: this.headers })
 			.toPromise()
 			.then(response => response.json() as Ad)
 			.catch(this.handleError);
@@ -29,7 +29,7 @@ export class AdService {
 
 	getQuizAd(quiz: string): Promise<Ad> {
 		const url = `${this.AdUrl}/quiz/${quiz}`;
-		return this.http.get(url)
+		return this.http.get(url, { headers: this.headers })
 			.toPromise()
 			.then(response => response.json() as Ad)
 			.catch(this.handleError);
