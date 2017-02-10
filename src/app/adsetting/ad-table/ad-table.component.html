@@ -23,17 +23,24 @@
 									<input type="text" class="form-control" name="title" [(ngModel)]="model.title" placeholder="title" #title="ngModel"
 										required />
 								</div>
-								<div class="col-md-2">
-									<label for="img">이미지</label>
-									<img class="img-responsive" height="150" *ngIf="p.img != null" src="http://52.175.147.246:3000/imgs/{{model.img}}">
+								<div class="col-md-3">
+									<label for="img">이미지</label><a class="btn btn-primary btn-sm btn-right" *ngIf="getImg" (click)="changeImg()">이미지수정</a>
+									<img class="img-responsive" height="150" *ngIf="p.img != null && getImg" src="http://52.175.147.246:3000/imgs/{{model.img}}">
+									<div class="form-group" [ngClass]="{ 'has-error': f.submitted && !title.valid }">
+										<div *ngIf="!getImg">
+											<label for="img-upload">이미지 업로드</label>
+											<input type="file" name="img-upload" ng2FileSelect [uploader]="uploader" />
+											<a class="btn btn-success btn-sm" (click)="uploadFile()">
+												<span class="glyphicon glyphicon-upload"></span> 올리기
+											</a>
+										</div>
+									</div>
 								</div>
-
-								<div class="form-group col-md-2" [ngClass]="{ 'has-error': f.submitted && !title.valid }">
+								<div class="form-group col-md-3" [ngClass]="{ 'has-error': f.submitted && !title.valid }">
 									<label for="quizinfo">퀴즈정보</label>
-									<input type="text" class="form-control" name="quizinfo" [(ngModel)]="model.quizinfo" placeholder="quizinfo" #quizinfo="ngModel" required
-									/>
+									<input type="text" class="form-control" name="quizinfo" [(ngModel)]="model.quizinfo" placeholder="quizinfo" #quizinfo="ngModel"/>
 								</div>
-								<div class="form-group col-md-2" [ngClass]="{ 'has-error': f.submitted && !title.valid }">
+								<div class="form-group col-md-3" [ngClass]="{ 'has-error': f.submitted && !title.valid }">
 									<label for="link">광고링크</label>
 									<input type="text" class="form-control" name="link" [(ngModel)]="model.link" placeholder="link" #link="ngModel" required
 									/>

@@ -1,11 +1,15 @@
 import { Component, Input, OnChanges, SimpleChange } from '@angular/core';
 import { Router } from '@angular/router';
 
+import { FileUploader } from 'ng2-file-upload/ng2-file-upload';
+
 import { QuizService } from './quiz.service';
 import { AdService } from './../adsetting/ad.service';
 
 import { Quiz } from './quiz';
 import { Ad } from './../adsetting/ad';
+
+const URL = 'http://52.175.147.246:3000/upload';
 
 @Component({
 	selector: 'app-quiz-table',
@@ -27,11 +31,31 @@ export class QuizTableComponent implements OnChanges {
 	@Input() category: string;
 	getCategory = false;
 	modifyPro = false;
+	public uploader: FileUploader = new FileUploader({ url: URL });
+	private uploadResult: any = null;
+	getImg = true;
+	imgurl = 'http://52.175.147.246:3000/imgs/';
 
 	constructor(
 		private QuizService: QuizService,
 		private AdService: AdService
-		) { }
+		) { 
+			this.uploader.onSuccessItem = (item, response, status, headers) => {
+				this.uploadResult = {
+					"success": true, "item": item, "response":
+						response, "status": status, "headers": headers
+				};
+			};
+			this.uploader.onErrorItem = (item, response, status, headers) => {
+				this.uploadResult = {
+					"success": false, "item": item,
+					"response": response, "status": status, "headers": headers
+				};
+			};
+			this.uploader.onCompleteAll = () => {
+				this.handleUploadComplete();
+			};
+		}
 
 	getAllAd(): void{
 		this.AdService.getAllAd()
@@ -94,6 +118,7 @@ export class QuizTableComponent implements OnChanges {
 
 	closeSubmit(): void{
 		this.getData = '';
+		this.getImg = true;
 	}
 
 	closeAdd(): void{
@@ -175,6 +200,26 @@ export class QuizTableComponent implements OnChanges {
 
 	exitpro() {
 		this.modifyPro = false;
+	}
+
+	changeImg() {
+		this.getImg = false;
+	}
+
+	private handleUploadComplete() {
+		console.log("upload compete : " + this.uploadResult.response);
+		if (this.uploadResult.success) {
+			console.log('성공');
+			this.imgurl = this.imgurl + this.uploadResult.response;
+			this.getImg = true;
+			this.model.img = this.uploadResult.response;
+		} else {
+			console.log('실패');
+		}
+	}
+
+	uploadFile() {
+		this.uploader.uploadAll(); // 업로드 시작
 	}
 
 	ngOnChanges() {

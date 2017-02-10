@@ -33,17 +33,21 @@
 						<!--수정 상태의 입력 폼-->
 						<td *ngIf="p._id === getData" colspan="100%">
 							<form name="form" (ngSubmit)="f.form.valid && updateQuiz()" #f="ngForm" novalidate>
-								<div class="col-md-1">
-									<label for="id">ID: </label> {{model._id}}
-								</div>
 								<div class="form-group col-md-1" [ngClass]="{ 'has-error': f.submitted && !name.valid }">
-									<label for="priority">우선순위</label>
-									<input type="text" class="form-control" name="priority" [(ngModel)]="model.priority" placeholder="priority" #priority="ngModel"
-										required />
+									<label for="priority">우선순위 : {{i+1}}</label>
 								</div>
-								<div class="col-md-2">
-									<label for="img">이미지</label>
-									<img class="img-responsive" height="150" *ngIf="p.img != null" src="http://52.175.147.246:3000/imgs/{{model.img}}">
+								<div class="col-md-3">
+									<label for="img">이미지</label><a class="btn btn-primary btn-sm btn-right" *ngIf="getImg" (click)="changeImg()">이미지수정</a>
+									<img class="img-responsive" height="150" *ngIf="p.img != null && getImg" src="http://52.175.147.246:3000/imgs/{{model.img}}">
+									<div class="form-group" [ngClass]="{ 'has-error': f.submitted && !name.valid }">
+										<div *ngIf="!getImg">
+											<label for="img-upload">이미지 업로드</label>
+											<input type="file" name="img-upload" ng2FileSelect [uploader]="uploader" />
+											<a class="btn btn-success btn-sm" (click)="uploadFile()">
+												<span class="glyphicon glyphicon-upload"></span> 올리기
+											</a>
+										</div>
+									</div>
 								</div>
 								<div class="form-group col-md-2" [ngClass]="{ 'has-error': f.submitted && !name.valid }">
 									<label for="smallcat">카테고리</label>
