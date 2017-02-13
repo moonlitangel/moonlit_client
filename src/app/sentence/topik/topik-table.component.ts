@@ -5,6 +5,7 @@ import { SentenceService } from './../sentence.service';
 
 @Component({
 	selector: 'app-topik-table',
+	styles: ['.answer { font-weight: bold}'],
 	templateUrl: './topik-table.component.html'
 })
 export class TopikTableComponent implements OnChanges {

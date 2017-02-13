@@ -5,12 +5,20 @@
 			<input type="text" class="form-control" name="topiknum" [(ngModel)]="model.topiknum" #topiknum="ngModel" required />
 		</div>
 		<div class="form-group" [ngClass]="{ 'has-error': f.submitted && !topik.valid }">
-			<label for="topik">문제</label>
+			<label for="title">문제타이틀</label>
+			<input type="text" class="form-control" name="title" [(ngModel)]="model.title" #title="ngModel" required />
+		</div>
+		<div class="form-group" [ngClass]="{ 'has-error': f.submitted && !topik.valid }">
+			<label for="topik">문제내용</label>
 			<input type="text" class="form-control" name="topik" [(ngModel)]="model.topik" #topik="ngModel" required />
 		</div>
 		<div class="form-group" [ngClass]="{ 'has-error': f.submitted && !topik.valid }">
-			<label for="answer">답</label>
+			<label for="answer">보기</label>
 			<input type="text" class="form-control" name="answer" [(ngModel)]="model.answer" #answer="ngModel" required />
+		</div>
+		<div class="form-group" [ngClass]="{ 'has-error': f.submitted && !topik.valid }">
+			<label for="answerNum">정답</label>
+			<input type="text" class="form-control" name="answerNum" [(ngModel)]="model.answerNum" #answerNum="ngModel" required />
 		</div>
 		<div class="form-group" [ngClass]="{ 'has-error': f.submitted && !topik.valid }">
 			<label for="time">날짜</label>
