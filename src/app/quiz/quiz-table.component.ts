@@ -29,6 +29,7 @@ export class QuizTableComponent implements OnChanges {
 	adText: string = 'Not found';
 	getAd: number = -1;
 	@Input() category: string;
+	@Input() categoryId: string;
 	getCategory = false;
 	modifyPro = false;
 	public uploader: FileUploader = new FileUploader({ url: URL });

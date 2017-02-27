@@ -22,6 +22,7 @@ export class QuizEditComponent implements OnChanges {
 	@Input() category: string;
 
 	constructor(private QuizService: QuizService) {
+		this.uploader.onAfterAddingFile = (file)=> { file.withCredentials = false; };	//클라이언트에서의 credentials 문제였던것이였다...
 		this.uploader.onSuccessItem = (item, response, status, headers) => {
 			this.uploadResult = {
 				"success": true, "item": item, "response":
@@ -65,6 +66,7 @@ export class QuizEditComponent implements OnChanges {
 
 	ngOnChanges() {
 		this.model.smallcat = this.category;
+		this.model.categoryId = this.categoryId;
 	}
 
 }

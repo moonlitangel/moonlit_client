@@ -7,6 +7,6 @@
 
 <tabset>
 	<tab *ngFor="let category of categores" [heading]="category.smallcat">
-		<app-quiz-table [category]="category.smallcat"></app-quiz-table>
+		<app-quiz-table [category]="category.smallcat" [categoryId]="category._id"></app-quiz-table>
 	</tab>
 </tabset>

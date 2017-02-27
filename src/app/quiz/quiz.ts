@@ -7,4 +7,5 @@ export class Quiz {
 	img: string;
 	priority: number;
 	ad: boolean = false;
+	categoryId: string;
 }
