@@ -12,6 +12,7 @@ ee http://help.github.com/ignore-files/ for more about ignoring files.
 
 # Production
 build
+dist
 
 # Created by https://www.gitignore.io/api/webstorm,node,windows,linux,macos
 
