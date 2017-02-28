@@ -75,6 +75,7 @@ export class QuizTableComponent implements OnChanges {
 			.then(results => {
 				this.getData = id;
 				this.model = results;
+				this.model.categoryId = this.categoryId;
 			})
 	}
 
@@ -224,6 +225,6 @@ export class QuizTableComponent implements OnChanges {
 	}
 
 	ngOnChanges() {
-		this.getAllQuiz(this.category);
+		this.getAllQuiz(this.categoryId);
 	}
 }

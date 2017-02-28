@@ -12,8 +12,8 @@ export class QuizService {
 	private ApiUrl = 'http://52.175.147.246:3000/api';
 
 	constructor(private http: Http) { }
-	getAllQuiz(smallcat: string): Promise<Quiz[]> {
-		const url = `${this.QuizUrl}/${smallcat}`;
+	getAllQuiz(categoryId: string): Promise<Quiz[]> {
+		const url = `${this.QuizUrl}/category/${categoryId}`;
 		return this.http.get(url, { headers: this.headers })
 			.toPromise()
 			.then(response => response.json() as Quiz[])
