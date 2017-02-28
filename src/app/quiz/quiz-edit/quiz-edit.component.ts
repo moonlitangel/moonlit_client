@@ -20,6 +20,7 @@ export class QuizEditComponent implements OnChanges {
 	getImg = false;
 	imgurl = 'http://52.175.147.246:3000/imgs/';
 	@Input() category: string;
+	@Input() categoryId: string;
 
 	constructor(private QuizService: QuizService) {
 		this.uploader.onAfterAddingFile = (file)=> { file.withCredentials = false; };	//클라이언트에서의 credentials 문제였던것이였다...
